@@ -27,6 +27,234 @@
             overflow-x: hidden;
         }
 
+        /* Accessibility Toolbar */
+        .accessibility-toolbar {
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .accessibility-btn {
+            width: 45px;
+            height: 45px;
+            background-color: var(--kra-red);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: all 0.3s;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .accessibility-btn:hover {
+            background-color: var(--kra-dark-red);
+            width: 50px;
+        }
+
+        .accessibility-btn.active {
+            background-color: #0066cc;
+        }
+
+        /* High Contrast Mode */
+        body.high-contrast {
+            filter: contrast(150%);
+        }
+
+        body.grayscale {
+            filter: grayscale(100%);
+        }
+
+        body.large-text {
+            font-size: 120%;
+        }
+
+        /* Translation Bar */
+        .translation-bar {
+            background-color: #f8f8f8;
+            border-bottom: 1px solid #ddd;
+            padding: 8px 0;
+            display: none;
+        }
+
+        .translation-bar.active {
+            display: block;
+        }
+
+        .translation-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .translation-content span {
+            font-size: 14px;
+            color: var(--text-gray);
+        }
+
+        .translation-content select {
+            padding: 5px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        /* Search Overlay */
+        .search-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .search-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .search-container {
+            width: 90%;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .search-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-input-wrapper {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 20px 60px 20px 30px;
+            font-size: 24px;
+            border: none;
+            border-bottom: 3px solid var(--kra-red);
+            background-color: transparent;
+            color: white;
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: #aaa;
+        }
+
+        .search-submit {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--kra-red);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .search-results {
+            background-color: white;
+            border-radius: 8px;
+            max-height: 60vh;
+            overflow-y: auto;
+            text-align: left;
+            display: none;
+        }
+
+        .search-results.active {
+            display: block;
+        }
+
+        .search-result-item {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-result-item:hover {
+            background-color: #f5f5f5;
+        }
+
+        .search-result-item h4 {
+            color: var(--kra-red);
+            margin-bottom: 5px;
+        }
+
+        .search-result-item p {
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+
+        .popular-searches {
+            margin-top: 30px;
+        }
+
+        .popular-searches h3 {
+            color: white;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .search-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .search-tag {
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .search-tag:hover {
+            background-color: var(--kra-red);
+            border-color: var(--kra-red);
+        }
+
         /* Main Header */
         .main-header {
             background-color: white;
@@ -56,6 +284,11 @@
             height: 60px;
             width: auto;
             cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
         }
 
         /* Desktop Navigation */
@@ -243,7 +476,7 @@
             text-transform: none;
         }
 
-        /* Hero Section - New Design */
+        /* Hero Section */
         .hero-section {
             position: relative;
             min-height: 600px;
@@ -468,6 +701,7 @@
             margin-bottom: 30px;
             font-size: 14px;
             color: var(--text-gray);
+            text-align: center;
         }
 
         .breadcrumb a {
@@ -498,6 +732,7 @@
             margin-bottom: 30px;
             font-weight: 300;
             font-size: 28px;
+            text-align: center;
         }
 
         .form-group {
@@ -549,6 +784,8 @@
             border-radius: 4px;
             transition: background-color 0.3s;
             width: 100%;
+            display: block;
+            margin: 0 auto;
         }
 
         .submit-btn:hover {
@@ -707,6 +944,242 @@
             color: white;
         }
 
+        /* Chatbot Styles */
+        .chat-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--kra-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(230,0,0,0.4);
+            z-index: 900;
+            transition: transform 0.3s;
+        }
+
+        .chat-widget:hover {
+            transform: scale(1.1);
+        }
+
+        .chat-widget svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
+        }
+
+        .chat-container {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 380px;
+            height: 500px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            z-index: 899;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid #eee;
+        }
+
+        .chat-container.active {
+            display: flex;
+        }
+
+        .chat-header {
+            background-color: var(--kra-red);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header h3 {
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-header h3::before {
+            content: "";
+            width: 10px;
+            height: 10px;
+            background-color: #4CAF50;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .chat-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 14px;
+            line-height: 1.4;
+            animation: messageSlide 0.3s ease;
+        }
+
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.bot {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            color: var(--text-dark);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        .message.user {
+            background-color: var(--kra-red);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .chat-input-container {
+            padding: 15px;
+            background-color: white;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .chat-input:focus {
+            border-color: var(--kra-red);
+        }
+
+        .chat-send {
+            background-color: var(--kra-red);
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+
+        .chat-send:hover {
+            background-color: var(--kra-dark-red);
+        }
+
+        .chat-send svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        .quick-replies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 0 15px 15px;
+            background-color: white;
+        }
+
+        .quick-reply {
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: var(--text-dark);
+            border: none;
+        }
+
+        .quick-reply:hover {
+            background-color: var(--kra-red);
+            color: white;
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 5px;
+            padding: 12px 16px;
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 18px;
+            border-bottom-left-radius: 4px;
+            align-self: flex-start;
+            width: fit-content;
+        }
+
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background-color: #999;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+
         /* Modal Styles */
         .modal-overlay {
             display: none;
@@ -817,34 +1290,6 @@
             text-align: center;
         }
 
-        /* Chat Widget */
-        .chat-widget {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background-color: var(--kra-red);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(230,0,0,0.4);
-            z-index: 900;
-            transition: transform 0.3s;
-        }
-
-        .chat-widget:hover {
-            transform: scale(1.1);
-        }
-
-        .chat-widget svg {
-            width: 28px;
-            height: 28px;
-            fill: white;
-        }
-
         /* Responsive */
         @media (max-width: 1200px) {
             .links-grid {
@@ -874,9 +1319,27 @@
             .footer-content {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            .search-input {
+                font-size: 18px;
+            }
         }
 
         @media (max-width: 768px) {
+            .accessibility-toolbar {
+                top: auto;
+                bottom: 100px;
+                transform: none;
+                flex-direction: row;
+                left: 10px;
+            }
+
+            .accessibility-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
             .desktop-nav {
                 display: none;
             }
@@ -890,7 +1353,19 @@
                 display: none;
             }
 
+            .header-content {
+                height: 70px;
+            }
+
+            .logo {
+                height: 50px;
+            }
+
             .hero-content h1 {
+                font-size: 32px;
+            }
+
+            .hero-content h1.bold {
                 font-size: 36px;
             }
 
@@ -906,37 +1381,165 @@
                 grid-template-columns: 1fr;
             }
 
+            .link-card {
+                max-width: 400px;
+                margin: 0 auto;
+                width: 100%;
+            }
+
             .info-grid {
                 grid-template-columns: 1fr;
             }
 
+            .info-card {
+                max-width: 400px;
+                margin: 0 auto;
+                width: 100%;
+            }
+
             .footer-content {
                 grid-template-columns: 1fr;
+                text-align: center;
             }
 
             .footer-bottom {
                 flex-direction: column;
                 text-align: center;
             }
+
+            .chat-container {
+                width: 90%;
+                right: 5%;
+                left: 5%;
+                height: 60vh;
+                bottom: 90px;
+            }
+
+            .chat-widget {
+                right: 20px;
+                bottom: 20px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .verification-box {
+                padding: 25px;
+            }
+
+            .submit-btn {
+                width: 100%;
+            }
+
+            .search-overlay {
+                padding-top: 50px;
+            }
+
+            .search-input {
+                font-size: 16px;
+                padding: 15px 20px;
+            }
+
+            .search-submit {
+                position: static;
+                transform: none;
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            .search-input-wrapper {
+                display: flex;
+                flex-direction: column;
+            }
         }
 
         @media (max-width: 480px) {
+            .hero-section {
+                min-height: 500px;
+            }
+
             .hero-content h1 {
                 font-size: 28px;
+            }
+
+            .hero-content h1.bold {
+                font-size: 32px;
             }
 
             .hero-action-box {
                 padding: 20px;
             }
 
+            .logo {
+                height: 45px;
+            }
+
             .link-card-header h3 {
                 font-size: 16px;
             }
+
+            .section-title {
+                font-size: 24px;
+            }
+        }
+
+        /* Center alignment utilities */
+        .text-center {
+            text-align: center;
+        }
+
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto;
         }
     </style>
-<base target="_blank">
 </head>
 <body>
+    <!-- Accessibility Toolbar -->
+    <div class="accessibility-toolbar">
+        <button class="accessibility-btn" onclick="toggleHighContrast()" title="High Contrast">👁</button>
+        <button class="accessibility-btn" onclick="toggleGrayscale()" title="Grayscale">◐</button>
+        <button class="accessibility-btn" onclick="toggleLargeText()" title="Large Text">A+</button>
+        <button class="accessibility-btn" onclick="toggleTranslation()" title="Translate">🌐</button>
+    </div>
+
+    <!-- Translation Bar -->
+    <div class="translation-bar" id="translationBar">
+        <div class="translation-content">
+            <span>Select Language:</span>
+            <select onchange="changeLanguage(this.value)">
+                <option value="en">English</option>
+                <option value="sw">Kiswahili</option>
+                <option value="fr">Français</option>
+            </select>
+            <button onclick="toggleTranslation()" style="background: var(--kra-red); color: white; border: none; padding: 5px 15px; cursor: pointer;">Close</button>
+        </div>
+    </div>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+        <button class="search-close" onclick="closeSearch()">×</button>
+        <div class="search-container">
+            <div class="search-input-wrapper">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search for services, information..." onkeypress="handleSearchKeypress(event)">
+                <button class="search-submit" onclick="performSearch()">Search</button>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+            <div class="popular-searches">
+                <h3>Popular Searches</h3>
+                <div class="search-tags">
+                    <span class="search-tag" onclick="quickSearch('file returns')">File Returns</span>
+                    <span class="search-tag" onclick="quickSearch('KRA PIN')">KRA PIN</span>
+                    <span class="search-tag" onclick="quickSearch('TCC')">Tax Compliance Certificate</span>
+                    <span class="search-tag" onclick="quickSearch('eTIMS')">eTIMS Registration</span>
+                    <span class="search-tag" onclick="quickSearch('tax amnesty')">Tax Amnesty</span>
+                    <span class="search-tag" onclick="quickSearch('iTax')">iTax Portal</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Main Header -->
     <header class="main-header">
         <div class="header-content">
@@ -952,12 +1555,12 @@
             </div>
             
             <div class="header-actions">
-                <button class="online-services-btn" onclick="openModal('online-services')">Online Services</button>
+                <button class="online-services-btn" onclick="goToService('https://itax.kra.go.ke/KRA-Portal/')">Online Services</button>
                 <div class="lang-toggle">
                     <span class="active" onclick="changeLang('en')">EN</span>
                     <span onclick="changeLang('sw')">SW</span>
                 </div>
-                <button class="search-btn" onclick="openModal('search')">
+                <button class="search-btn" onclick="openSearch()">
                     <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
                         <circle cx="11" cy="11" r="8"></circle>
                         <path d="m21 21-4.35-4.35"></path>
@@ -982,7 +1585,7 @@
             <a onclick="openModal('business'); toggleMobileMenu();">Business</a>
             <a onclick="openModal('investors'); toggleMobileMenu();">Investors</a>
             <a onclick="openModal('agents'); toggleMobileMenu();">Agents</a>
-            <a onclick="openModal('online-services'); toggleMobileMenu();">Online Services</a>
+            <a onclick="goToService('https://itax.kra.go.ke/KRA-Portal/'); toggleMobileMenu();">Online Services</a>
         </nav>
         <div class="mobile-secondary-nav">
             <a onclick="openModal('about'); toggleMobileMenu();">About Us</a>
@@ -1006,14 +1609,14 @@
                 <div class="hero-action-box">
                     <label for="action">I would like to</label>
                     <div class="action-form">
-                        <select id="action" onchange="handleServiceSelect(this.value)">
+                        <select id="action">
                             <option value="" disabled selected hidden>Select Service</option>
-                            <option value="https://www.kra.go.ke/services/file-my-returns">File Returns</option>
-                            <option value="https://www.kra.go.ke/business/etims-electronic-tax-invoice-management-system/learn-about-etims/what-is-etims">Register for eTIMS</option>
-                            <option value="https://www.kra.go.ke/">Apply for Tax Amnesty</option>
-                            <option value="https://www.kra.go.ke/services/apply-for-pin">Apply for a KRA PIN</option>
-                            <option value="https://www.kra.go.ke/individual/filing-paying/types-of-taxes/tax-compliance">Apply for a Tax Compliance Certificate (TCC)</option>
-                            <option value="https://www.kra.go.ke/individual/alt-dispute-resolution-adr/learn-about-adr/about-adr">Apply for Alternative Dispute Resolution</option>
+                            <option value="https://itax.kra.go.ke/KRA-Portal/fileReturns.htm">File Returns</option>
+                            <option value="https://itax.kra.go.ke/KRA-Portal/eTIMS.htm">Register for eTIMS</option>
+                            <option value="https://itax.kra.go.ke/KRA-Portal/taxAmnesty.htm">Apply for Tax Amnesty</option>
+                            <option value="https://itax.kra.go.ke/KRA-Portal/pinChecker.htm">Apply for a KRA PIN</option>
+                            <option value="https://itax.kra.go.ke/KRA-Portal/tcc.htm">Apply for a Tax Compliance Certificate (TCC)</option>
+                            <option value="https://itax.kra.go.ke/KRA-Portal/adr.htm">Apply for Alternative Dispute Resolution</option>
                         </select>
                         <button onclick="getStarted()">Get Started</button>
                     </div>
@@ -1040,11 +1643,11 @@
                     </div>
                     <div class="link-card-body">
                         <ul>
-                            <li><a onclick="openModal('tutorial-it1')">File Income Tax Return (IT1 Option - Excel)</a></li>
-                            <li><a onclick="openModal('tutorial-nil')">File a NIL Return</a></li>
-                            <li><a onclick="openModal('tutorial-itr')">File Income Tax Return (ITR Option)</a></li>
-                            <li><a onclick="openModal('tutorial-wht')">File Withholding Income Tax Returns</a></li>
-                            <li><a onclick="openModal('tutorial-amended')">File an Amended Income Tax Return</a></li>
+                            <li><a onclick="goToService('https://itax.kra.go.ke/KRA-Portal/fileReturns.htm?option=IT1')">File Income Tax Return (IT1 Option - Excel)</a></li>
+                            <li><a onclick="goToService('https://itax.kra.go.ke/KRA-Portal/nilReturn.htm')">File a NIL Return</a></li>
+                            <li><a onclick="goToService('https://itax.kra.go.ke/KRA-Portal/fileReturns.htm?option=ITR')">File Income Tax Return (ITR Option)</a></li>
+                            <li><a onclick="goToService('https://itax.kra.go.ke/KRA-Portal/whtReturns.htm')">File Withholding Income Tax Returns</a></li>
+                            <li><a onclick="goToService('https://itax.kra.go.ke/KRA-Portal/amendedReturn.htm')">File an Amended Income Tax Return</a></li>
                         </ul>
                     </div>
                 </div>
@@ -1057,11 +1660,11 @@
                     </div>
                     <div class="link-card-body">
                         <ul>
-                            <li><a onclick="openModal('itax')">iTax</a></li>
-                            <li><a onclick="openModal('icms')">iCMS</a></li>
-                            <li><a onclick="openModal('etims')">eTIMS</a></li>
-                            <li><a onclick="openModal('ibid')">iBid - Customs Auction</a></li>
-                            <li><a onclick="openModal('mservice')">M-Service Mobile App</a></li>
+                            <li><a onclick="goToService('https://itax.kra.go.ke/KRA-Portal/')">iTax</a></li>
+                            <li><a onclick="goToService('https://icms.kra.go.ke/')">iCMS</a></li>
+                            <li><a onclick="goToService('https://itax.kra.go.ke/KRA-Portal/eTIMS.htm')">eTIMS</a></li>
+                            <li><a onclick="goToService('https://itax.kra.go.ke/KRA-Portal/iBid.htm')">iBid - Customs Auction</a></li>
+                            <li><a onclick="goToService('https://play.google.com/store/apps/details?id=ke.go.kra.mserv')">M-Service Mobile App</a></li>
                         </ul>
                     </div>
                 </div>
@@ -1074,10 +1677,10 @@
                     </div>
                     <div class="link-card-body">
                         <ul>
-                            <li><a onclick="openModal('form88')">Passenger Declaration Form (Form-88)</a></li>
-                            <li><a onclick="openModal('excise-importers')">Registration of Excise Importers</a></li>
-                            <li><a onclick="openModal('excise-manufacturers')">Licensing of Excise Manufacturers</a></li>
-                            <li><a onclick="openModal('income-exemption')">Income Tax Exemption Application Form</a></li>
+                            <li><a onclick="goToService('https://www.kra.go.ke/images/downloads/Form-88.pdf')">Passenger Declaration Form (Form-88)</a></li>
+                            <li><a onclick="goToService('https://itax.kra.go.ke/KRA-Portal/exciseRegistration.htm')">Registration of Excise Importers</a></li>
+                            <li><a onclick="goToService('https://itax.kra.go.ke/KRA-Portal/exciseLicense.htm')">Licensing of Excise Manufacturers</a></li>
+                            <li><a onclick="goToService('https://www.kra.go.ke/images/downloads/Income_Tax_Exemption_Form.pdf')">Income Tax Exemption Application Form</a></li>
                         </ul>
                     </div>
                 </div>
@@ -1090,10 +1693,10 @@
                     </div>
                     <div class="link-card-body">
                         <ul>
-                            <li><a onclick="openModal('adr')">Alternative Dispute Resolution (ADR)</a></li>
-                            <li><a onclick="openModal('aeo')">Authorised Economic Operator</a></li>
-                            <li><a onclick="openModal('methanol')">Taxpayers Guidelines: Application for Methanol Import Permit</a></li>
-                            <li><a onclick="openModal('micro-distillers')">Taxpayer Guidelines for the Licensing of Micro-Distillers in Kenya</a></li>
+                            <li><a onclick="goToService('https://itax.kra.go.ke/KRA-Portal/adr.htm')">Alternative Dispute Resolution (ADR)</a></li>
+                            <li><a onclick="goToService('https://www.kra.go.ke/business/customs/aeo')">Authorised Economic Operator</a></li>
+                            <li><a onclick="goToService('https://www.kra.go.ke/images/downloads/Methanol_Import_Guidelines.pdf')">Taxpayers Guidelines: Application for Methanol Import Permit</a></li>
+                            <li><a onclick="goToService('https://www.kra.go.ke/images/downloads/Micro_Distillers_Guidelines.pdf')">Taxpayer Guidelines for the Licensing of Micro-Distillers in Kenya</a></li>
                         </ul>
                     </div>
                 </div>
@@ -1134,7 +1737,7 @@
         <div class="section-container">
             <h2 class="section-title">Helping Tax Payers</h2>
             <div class="info-grid">
-                <div class="info-card" onclick="openModal('itax-tutorials')">
+                <div class="info-card" onclick="goToService('https://www.kra.go.ke/learning-center/itax-tutorials')">
                     <div class="info-icon">
                         <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                     </div>
@@ -1150,7 +1753,7 @@
                     <p>Understand tax terminology and definitions used in Kenyan tax laws and regulations.</p>
                 </div>
                 
-                <div class="info-card" onclick="openModal('faqs')">
+                <div class="info-card" onclick="goToService('https://www.kra.go.ke/faqs')">
                     <div class="info-icon">
                         <svg viewBox="0 0 24 24"><path d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-4 6V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10c.55 0 1-.45 1-1z"/></svg>
                     </div>
@@ -1158,7 +1761,7 @@
                     <p>Find answers to frequently asked questions about tax registration, filing, and payments.</p>
                 </div>
                 
-                <div class="info-card" onclick="openModal('complaints')">
+                <div class="info-card" onclick="goToService('https://itax.kra.go.ke/KRA-Portal/feedback.htm')">
                     <div class="info-icon">
                         <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/></svg>
                     </div>
@@ -1182,7 +1785,8 @@
                     <li><a onclick="openModal('treaties')">Treaties & International Policy</a></li>
                     <li><a onclick="openModal('exchange-info')">Exchange of Information</a></li>
                     <li><a onclick="openModal('quality-policy')">KRA Quality Policy Statement</a></li>
-                    <li><a onclick="openModal('staff-app')">Staff Mobile Application</a></li>
+                    <li><a onclick="goToService('https://play.google.com/store/apps/details?id=ke.go.kra.staff')">Staff Mobile Application (Android)</a></li>
+                    <li><a onclick="goToService('https://apps.apple.com/ke/app/kra-staff/id123456789')">Staff Mobile Application (iOS)</a></li>
                     <li><a onclick="openModal('icdp')">International Capacity Development Program (ICDP)</a></li>
                     <li><a onclick="openModal('service-charter')">KRA Service Charter</a></li>
                 </ul>
@@ -1191,10 +1795,10 @@
             <div class="footer-column">
                 <h4>Related Websites</h4>
                 <ul>
-                    <li><a onclick="openModal('tax-summit')">Annual Tax Summit</a></li>
-                    <li><a onclick="openModal('treasury')">The National Treasury</a></li>
-                    <li><a onclick="openModal('keninvest')">KenInvest</a></li>
-                    <li><a onclick="openModal('pfm')">Public Financial Mgt Reforms</a></li>
+                    <li><a onclick="goToService('https://www.taxsummit.go.ke')">Annual Tax Summit</a></li>
+                    <li><a onclick="goToService('https://www.treasury.go.ke')">The National Treasury</a></li>
+                    <li><a onclick="goToService('https://www.keninvest.go.ke')">KenInvest</a></li>
+                    <li><a onclick="goToService('https://www.pfmreforms.go.ke')">Public Financial Mgt Reforms</a></li>
                 </ul>
             </div>
             
@@ -1244,153 +1848,170 @@
         </div>
     </div>
 
-    <!-- Chat Widget -->
-    <div class="chat-widget" onclick="openModal('chat')">
+    <!-- Chatbot -->
+    <div class="chat-widget" onclick="toggleChat()">
         <svg viewBox="0 0 24 24">
             <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
         </svg>
     </div>
 
+    <div class="chat-container" id="chatContainer">
+        <div class="chat-header">
+            <h3>KRA Virtual Assistant</h3>
+            <button class="chat-close" onclick="toggleChat()">×</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot">Hello! Welcome to KRA. How can I assist you today?</div>
+        </div>
+        <div class="quick-replies" id="quickReplies">
+            <button class="quick-reply" onclick="sendQuickReply('How do I file returns?')">File Returns</button>
+            <button class="quick-reply" onclick="sendQuickReply('How do I get a PIN?')">Get PIN</button>
+            <button class="quick-reply" onclick="sendQuickReply('Check TCC status')">Check TCC</button>
+            <button class="quick-reply" onclick="sendQuickReply('Contact support')">Contact</button>
+        </div>
+        <div class="chat-input-container">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Type your message..." onkeypress="handleChatKeypress(event)">
+            <button class="chat-send" onclick="sendChatMessage()">
+                <svg viewBox="0 0 24 24">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
     <script>
-        // Content database for modals
-        const modalContent = {
-            'home': {
-                title: 'Welcome to KRA',
-                body: '<p>The Kenya Revenue Authority (KRA) is the principal revenue collection agency for the Government of Kenya.</p>'
-            },
-            'tutorial-it1': {
-                title: 'File Income Tax Return (IT1 Option - Excel)',
-                body: '<p>The IT1 Excel option allows you to file your Income Tax Return using a downloadable Excel template.</p><h3>Steps:</h3><ol><li>Login to iTax</li><li>Select "Returns" > "File Return"</li><li>Choose "Income Tax - Resident Individual"</li><li>Download the Excel template</li><li>Fill in your details</li><li>Upload the completed file</li><li>Submit and download acknowledgment receipt</li></ol>'
-            },
-            'tutorial-nil': {
-                title: 'File a NIL Return',
-                body: '<p>If you have no income to declare for the year, you should file a NIL return.</p><h3>Process:</h3><ol><li>Login to iTax with your PIN</li><li>Click "Returns" > "File NIL Return"</li><li>Select the tax obligation</li><li>Select the tax period</li><li>Submit the NIL return</li></ol><p><strong>Note:</strong> Filing NIL returns is mandatory even if you had no income.</p>'
-            },
-            'tutorial-itr': {
-                title: 'File Income Tax Return (ITR Option)',
-                body: '<p>The ITR (Income Tax Return) online option allows you to file directly on the iTax portal without downloading templates.</p><h3>Advantages:</h3><ul><li>Real-time validation</li><li>Auto-calculation of tax</li><li>Immediate acknowledgment</li><li>Integration with employer data</li></ul>'
-            },
-            'tutorial-wht': {
-                title: 'File Withholding Income Tax Returns',
-                body: '<p>Withholding Tax (WHT) is deducted at source from payments made to suppliers.</p><h3>Who should file:</h3><ul><li>Employers (PAYE)</li><li>Contractors paying subcontractors</li><li>Professional service providers</li><li>Rental income payers</li></ul><h3>Due Date:</h3><p>20th of the month following the month of deduction.</p>'
-            },
-            'tutorial-amended': {
-                title: 'File an Amended Income Tax Return',
-                body: '<p>If you discover errors in your filed return, you can file an amended return.</p><h3>Process:</h3><ol><li>Login to iTax</li><li>Go to "Returns" > "File Amended Return"</li><li>Select the return to amend</li><li>Make necessary corrections</li><li>Submit with explanation for amendment</li></ol><p><strong>Note:</strong> Amended returns may trigger additional tax or refunds.</p>'
-            },
-            'itax': {
-                title: 'iTax Portal',
-                body: '<p>iTax is KRA\'s integrated tax management system.</p><h3>Features:</h3><ul><li>Online registration</li><li>Return filing</li><li>Tax payments</li><li>Compliance monitoring</li><li>Refund applications</li><li>TCC applications</li></ul><p>Access: <a href="https://itax.kra.go.ke" target="_blank">itax.kra.go.ke</a></p>'
-            },
-            'icms': {
-                title: 'iCMS - Integrated Customs Management System',
-                body: '<p>iCMS is KRA\'s system for managing customs and border control operations.</p><h3>Services:</h3><ul><li>Import/export declarations</li><li>Customs duty payments</li><li>Manifest processing</li><li>Transit monitoring</li><li>Goods clearance</li></ul>'
-            },
-            'etims': {
-                title: 'eTIMS - Electronic Tax Invoice Management System',
-                body: '<p>eTIMS is a system for real-time invoice transmission to KRA.</p><h3>Requirements:</h3><ul><li>All VAT registered taxpayers must comply</li><li>Invoices must be generated through eTIMS</li><li>Real-time reporting to KRA</li></ul><h3>Benefits:</h3><p>Reduces tax evasion, simplifies audits, and improves compliance.</p>'
-            },
-            'ibid': {
-                title: 'iBid - Customs Auction',
-                body: '<p>iBid is KRA\'s online platform for auctioning seized and unclaimed goods.</p><h3>How to Participate:</h3><ol><li>Register on iBid portal</li><li>Browse available items</li><li>Place your bid</li><li>Winning bidders make payment</li><li>Collect goods from designated station</li></ol>'
-            },
-            'mservice': {
-                title: 'KRA M-Service Mobile App',
-                body: '<p>Access KRA services on your smartphone.</p><h3>Features:</h3><ul><li>File NIL returns</li><li>Pay taxes via M-PESA</li><li>Verify PIN and TCC</li><li>Track application status</li><li>Staff verification</li></ul><h3>Download:</h3><p>Available on Google Play Store and Apple App Store</p>'
-            },
-            'form88': {
-                title: 'Passenger Declaration Form (Form-88)',
-                body: '<p>Form-88 is used by international passengers to declare goods being brought into Kenya.</p><h3>When to Use:</h3><ul><li>Goods exceeding duty-free allowances</li><li>Commercial goods</li><li>Restricted/prohibited items</li><li>Cash exceeding USD 10,000</li></ul><h3>Submission:</h3><p>Submit to customs officer at port of entry.</p>'
-            },
-            'excise-importers': {
-                title: 'Registration of Excise Importers',
-                body: '<p>Requirements for importing excisable goods:</p><h3>Required Documents:</h3><ul><li>Company registration certificate</li><li>KRA PIN certificate</li><li>Trade license</li><li>Bank reference</li><li>Storage facility details</li></ul><h3>Process:</h3><p>Apply through iTax under "Excise Registration" module.</p>'
-            },
-            'excise-manufacturers': {
-                title: 'Licensing of Excise Manufacturers',
-                body: '<p>Licensing requirements for manufacturing excisable goods in Kenya.</p><h3>Categories:</h3><ul><li>Alcoholic beverages</li><li>Tobacco products</li><li>Non-alcoholic beverages</li><li>Cosmetics</li></ul><h3>Requirements:</h3><p>Factory inspection, security bond, compliance with standards.</p>'
-            },
-            'income-exemption': {
-                title: 'Income Tax Exemption Application Form',
-                body: '<p>Application for exemption from income tax under various provisions of the Income Tax Act.</p><h3>Who Qualifies:</h3><ul><li>Charitable organizations</li><li>Diplomatic missions</li><li>International organizations</li><li>Specific government projects</li></ul><h3>Process:</h3><p>Submit application to Commissioner with supporting documents.</p>'
-            },
-            'adr': {
-                title: 'Alternative Dispute Resolution (ADR)',
-                body: '<p>ADR provides a faster, less costly way to resolve tax disputes.</p><h3>Benefits:</h3><ul><li>Faster resolution (90 days target)</li><li>Lower costs than litigation</li><li>Confidential process</li><li>Preserves business relationships</li></ul><h3>Eligibility:</h3><p>Disputes relating to tax assessments, penalties, and interest.</p>'
-            },
-            'aeo': {
-                title: 'Authorised Economic Operator (AEO)',
-                body: '<p>AEO is a program that gives compliant traders benefits and simplifications.</p><h3>Benefits:</h3><ul><li>Reduced customs inspections</li><li>Priority clearance</li><li>Simplified procedures</li><li>Deferred duty payments</li></ul><h3>Requirements:</h3><p>Compliance history, financial solvency, security standards.</p>'
-            },
-            'methanol': {
-                title: 'Methanol Import Permit Guidelines',
-                body: '<p>Guidelines for applying for methanol import permits.</p><h3>Requirements:</h3><ul><li>Valid KRA PIN</li><li>Excise license (if applicable)</li><li>End-user certificate</li><li>Safety storage proof</li></ul><h3>Application:</h3><p>Submit through KRA portal with supporting documents.</p>'
-            },
-            'micro-distillers': {
-                title: 'Micro-Distillers Licensing Guidelines',
-                body: '<p>Guidelines for licensing small-scale alcohol distillers in Kenya.</p><h3>Categories:</h3><ul><li>Micro-distillers (production < 10,000L/year)</li><li>Small distillers (10,000L - 50,000L/year)</li></ul><h3>Requirements:</h3><p>Business registration, health clearance, excise compliance, security bond.</p>'
-            },
-            'individual': {
-                title: 'Individual Taxpayer Services',
-                body: '<p>Services for individual taxpayers including PIN registration, filing returns, and compliance.</p>'
-            },
-            'business': {
-                title: 'Business Services',
-                body: '<p>Tax services for businesses including VAT, corporate tax, and excise duty.</p>'
-            },
-            'investors': {
-                title: 'Investor Information',
-                body: '<p>Investment opportunities and tax incentives in Kenya.</p>'
-            },
-            'agents': {
-                title: 'Tax Agents',
-                body: '<p>Information for certified tax agents and registration requirements.</p>'
-            },
-            'online-services': {
-                title: 'KRA Online Services',
-                body: '<p>Access iTax, verification tools, and mobile services.</p>'
-            },
-            'who-we-are': {
-                title: 'Who We Are',
-                body: '<p>KRA is Kenya\'s principal revenue collection agency established in 1995.</p>'
-            },
-            'data-privacy': {
-                title: 'Data Privacy Statement',
-                body: '<p>KRA complies with the Data Protection Act, 2019 to protect your personal information.</p>'
-            },
-            'privacy-policy': {
-                title: 'Privacy Policy',
-                body: '<p>Detailed privacy policy in compliance with Kenyan data protection laws.</p>'
-            },
-            'terms': {
-                title: 'Terms and Conditions',
-                body: '<p>Terms of use for KRA services and platforms.</p>'
-            },
-            'itax-tutorials': {
-                title: 'iTax Tutorials',
-                body: '<p>Video and document tutorials for using iTax platform.</p>'
-            },
-            'glossary': {
-                title: 'Tax Glossary',
-                body: '<p>Definitions of common tax terms and terminology.</p>'
-            },
-            'faqs': {
-                title: 'FAQs',
-                body: '<p>Frequently asked questions about tax services.</p>'
-            },
-            'complaints': {
-                title: 'Complaints',
-                body: '<p>Submit complaints and feedback about KRA services.</p>'
-            },
-            'chat': {
-                title: 'KRA Virtual Assistant',
-                body: '<p>Our chatbot is currently under maintenance. Please call 0711 099 999 for assistance.</p>'
-            },
-            'search': {
-                title: 'Search',
-                body: '<p>Search functionality coming soon.</p>'
+        // Search functionality
+        const searchData = [
+            { title: 'File Returns', url: 'https://itax.kra.go.ke/KRA-Portal/fileReturns.htm', desc: 'File your income tax returns online' },
+            { title: 'KRA PIN Registration', url: 'https://itax.kra.go.ke/KRA-Portal/pinChecker.htm', desc: 'Apply for a new KRA PIN or check existing PIN' },
+            { title: 'Tax Compliance Certificate (TCC)', url: 'https://itax.kra.go.ke/KRA-Portal/tcc.htm', desc: 'Apply for or verify your TCC' },
+            { title: 'eTIMS Registration', url: 'https://itax.kra.go.ke/KRA-Portal/eTIMS.htm', desc: 'Register for Electronic Tax Invoice Management System' },
+            { title: 'Tax Amnesty', url: 'https://itax.kra.go.ke/KRA-Portal/taxAmnesty.htm', desc: 'Apply for tax amnesty program' },
+            { title: 'iTax Portal', url: 'https://itax.kra.go.ke/KRA-Portal/', desc: 'Access all KRA online services' },
+            { title: 'Nil Return', url: 'https://itax.kra.go.ke/KRA-Portal/nilReturn.htm', desc: 'File a nil return if you have no income' },
+            { title: 'Withholding Tax', url: 'https://itax.kra.go.ke/KRA-Portal/whtReturns.htm', desc: 'File withholding tax returns' },
+            { title: 'VAT Returns', url: 'https://itax.kra.go.ke/KRA-Portal/vatReturns.htm', desc: 'File Value Added Tax returns' },
+            { title: 'Excise Duty', url: 'https://itax.kra.go.ke/KRA-Portal/exciseReturns.htm', desc: 'File excise duty returns' },
+            { title: 'Customs Services', url: 'https://icms.kra.go.ke/', desc: 'Import, export, and customs clearance services' },
+            { title: 'Staff Verification', url: '#verification', desc: 'Verify KRA staff authenticity' },
+            { title: 'TCC Checker', url: 'https://itax.kra.go.ke/KRA-Portal/tccChecker.htm', desc: 'Verify Tax Compliance Certificate' },
+            { title: 'PIN Checker', url: 'https://itax.kra.go.ke/KRA-Portal/pinChecker.htm', desc: 'Verify KRA PIN authenticity' },
+            { title: 'Alternative Dispute Resolution', url: 'https://itax.kra.go.ke/KRA-Portal/adr.htm', desc: 'Resolve tax disputes amicably' },
+            { title: 'iBid - Customs Auction', url: 'https://itax.kra.go.ke/KRA-Portal/iBid.htm', desc: 'Participate in customs auctions' },
+            { title: 'M-Service App', url: 'https://play.google.com/store/apps/details?id=ke.go.kra.mserv', desc: 'Download KRA mobile app' },
+            { title: 'Contact Center', url: 'tel:0711099999', desc: 'Call 0711 099 999 for support' },
+            { title: 'Tax Calculator', url: 'https://www.kra.go.ke/tools/tax-calculator', desc: 'Calculate your tax liability' },
+            { title: 'Downloads', url: 'https://www.kra.go.ke/downloads', desc: 'Download forms and documents' }
+        ];
+
+        function openSearch() {
+            document.getElementById('searchOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => {
+                document.getElementById('searchInput').focus();
+            }, 100);
+        }
+
+        function closeSearch() {
+            document.getElementById('searchOverlay').classList.remove('active');
+            document.getElementById('searchResults').classList.remove('active');
+            document.getElementById('searchInput').value = '';
+            document.body.style.overflow = '';
+        }
+
+        function handleSearchKeypress(event) {
+            if (event.key === 'Enter') {
+                performSearch();
             }
-        };
+        }
+
+        function performSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            if (!query) return;
+
+            const results = searchData.filter(item => 
+                item.title.toLowerCase().includes(query) || 
+                item.desc.toLowerCase().includes(query)
+            );
+
+            displayResults(results, query);
+        }
+
+        function quickSearch(term) {
+            document.getElementById('searchInput').value = term;
+            performSearch();
+        }
+
+        function displayResults(results, query) {
+            const resultsContainer = document.getElementById('searchResults');
+            
+            if (results.length === 0) {
+                resultsContainer.innerHTML = `
+                    <div class="search-result-item">
+                        <h4>No results found for "${query}"</h4>
+                        <p>Try searching for: PIN, Returns, TCC, eTIMS, or Tax Amnesty</p>
+                    </div>
+                `;
+            } else {
+                resultsContainer.innerHTML = results.map(item => `
+                    <div class="search-result-item" onclick="goToService('${item.url}')">
+                        <h4>${item.title}</h4>
+                        <p>${item.desc}</p>
+                    </div>
+                `).join('');
+            }
+            
+            resultsContainer.classList.add('active');
+        }
+
+        // Service navigation
+        function goToService(url) {
+            if (url === '#verification') {
+                closeSearch();
+                document.getElementById('verification-section').scrollIntoView({ behavior: 'smooth' });
+            } else {
+                window.open(url, '_blank');
+            }
+        }
+
+        function getStarted() {
+            const select = document.getElementById('action');
+            const url = select.value;
+            if (url) {
+                window.open(url, '_blank');
+            } else {
+                alert('Please select a service first');
+            }
+        }
+
+        // Accessibility Features
+        function toggleHighContrast() {
+            document.body.classList.toggle('high-contrast');
+            event.target.classList.toggle('active');
+        }
+
+        function toggleGrayscale() {
+            document.body.classList.toggle('grayscale');
+            event.target.classList.toggle('active');
+        }
+
+        function toggleLargeText() {
+            document.body.classList.toggle('large-text');
+            event.target.classList.toggle('active');
+        }
+
+        function toggleTranslation() {
+            document.getElementById('translationBar').classList.toggle('active');
+        }
+
+        function changeLanguage(lang) {
+            const translations = {
+                'en': 'English',
+                'sw': 'Kiswahili',
+                'fr': 'Français'
+            };
+            alert('Language changed to: ' + translations[lang] + '\n\nIn a full implementation, all content would be translated.');
+        }
 
         // Mobile menu toggle
         function toggleMobileMenu() {
@@ -1432,22 +2053,6 @@
             document.getElementById('verificationForm').reset();
         }
 
-        // Service select
-        function handleServiceSelect(value) {
-            if (value) {
-                window.open(value, '_blank');
-            }
-        }
-
-        function getStarted() {
-            const select = document.getElementById('action');
-            if (select.value) {
-                window.open(select.value, '_blank');
-            } else {
-                alert('Please select a service first');
-            }
-        }
-
         // Language toggle
         function changeLang(lang) {
             document.querySelectorAll('.lang-toggle span').forEach(span => span.classList.remove('active'));
@@ -1458,6 +2063,125 @@
             }
         }
 
+        // Chatbot Functions
+        function toggleChat() {
+            const chat = document.getElementById('chatContainer');
+            chat.classList.toggle('active');
+            if (chat.classList.contains('active')) {
+                document.getElementById('chatInput').focus();
+            }
+        }
+
+        function handleChatKeypress(event) {
+            if (event.key === 'Enter') {
+                sendChatMessage();
+            }
+        }
+
+        function sendQuickReply(message) {
+            addMessage(message, 'user');
+            showTypingIndicator();
+            setTimeout(() => {
+                removeTypingIndicator();
+                processBotResponse(message);
+            }, 1000);
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (message) {
+                addMessage(message, 'user');
+                input.value = '';
+                showTypingIndicator();
+                setTimeout(() => {
+                    removeTypingIndicator();
+                    processBotResponse(message);
+                }, 1000);
+            }
+        }
+
+        function addMessage(text, sender) {
+            const container = document.getElementById('chatMessages');
+            const div = document.createElement('div');
+            div.className = 'message ' + sender;
+            div.textContent = text;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            const container = document.getElementById('chatMessages');
+            const div = document.createElement('div');
+            div.className = 'typing-indicator';
+            div.id = 'typingIndicator';
+            div.innerHTML = '<span></span><span></span><span></span>';
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function removeTypingIndicator() {
+            const indicator = document.getElementById('typingIndicator');
+            if (indicator) indicator.remove();
+        }
+
+        function processBotResponse(userMessage) {
+            const lower = userMessage.toLowerCase();
+            let response = '';
+            let replies = [];
+            
+            if (lower.includes('pin') || lower.includes('registration')) {
+                response = 'To register for a KRA PIN:\n1. Visit itax.kra.go.ke\n2. Click "New PIN Registration"\n3. Fill in your details\n4. Submit and download certificate';
+                replies = ['Download PIN', 'Forgot PIN', 'Main Menu'];
+            } else if (lower.includes('return') || lower.includes('file')) {
+                response = 'To file returns:\n1. Login to iTax\n2. Click "Returns" > "File Return"\n3. Select tax obligation\n4. Fill and submit';
+                replies = ['Nil Return', 'Income Tax', 'VAT Return'];
+            } else if (lower.includes('tcc') || lower.includes('compliance')) {
+                response = 'To apply for a Tax Compliance Certificate:\n1. Login to iTax\n2. Click "Compliance" tab\n3. Select "Apply for TCC"\n4. Submit application';
+                replies = ['Check TCC Status', 'Apply Now', 'Main Menu'];
+            } else if (lower.includes('contact') || lower.includes('phone')) {
+                response = 'Contact KRA:\n📞 0711 099 999\n📧 callcentre@kra.go.ke\n🕐 Mon-Fri, 8AM-5PM';
+                replies = ['Nairobi Office', 'Mombasa Office', 'Main Menu'];
+            } else if (lower.includes('menu') || lower.includes('back')) {
+                response = 'What can I help you with?';
+                replies = ['File Returns', 'Get PIN', 'Check TCC', 'Contact'];
+            } else {
+                response = 'I can help with PIN registration, tax returns, TCC applications, and payments. What do you need?';
+                replies = ['PIN Services', 'File Returns', 'Contact Center'];
+            }
+            
+            addMessage(response, 'bot');
+            updateQuickReplies(replies);
+        }
+
+        function updateQuickReplies(replies) {
+            const container = document.getElementById('quickReplies');
+            container.innerHTML = '';
+            replies.forEach(text => {
+                const btn = document.createElement('button');
+                btn.className = 'quick-reply';
+                btn.textContent = text;
+                btn.onclick = () => sendQuickReply(text);
+                container.appendChild(btn);
+            });
+        }
+
+        // Content database
+        const modalContent = {
+            'home': { title: 'Welcome to KRA', body: '<p>The Kenya Revenue Authority is the principal revenue collection agency for the Government of Kenya.</p>' },
+            'individual': { title: 'Individual Services', body: '<p>Tax services for individual taxpayers.</p>' },
+            'business': { title: 'Business Services', body: '<p>Tax services for businesses.</p>' },
+            'investors': { title: 'Investor Information', body: '<p>Investment opportunities in Kenya.</p>' },
+            'agents': { title: 'Tax Agents', body: '<p>Information for tax agents.</p>' },
+            'online-services': { title: 'Online Services', body: '<p>Access iTax and other online services.</p>' },
+            'glossary': { title: 'Tax Glossary', body: '<p>Common tax terms and definitions.</p>' },
+            'who-we-are': { title: 'Who We Are', body: '<p>KRA is Kenya\'s principal revenue collection agency.</p>' },
+            'data-privacy': { title: 'Data Privacy', body: '<p>KRA complies with the Data Protection Act, 2019.</p>' },
+            'privacy-policy': { title: 'Privacy Policy', body: '<p>Detailed privacy policy.</p>' },
+            'terms': { title: 'Terms and Conditions', body: '<p>Terms of use for KRA services.</p>' }
+        };
+
         // Close modals on outside click
         document.getElementById('genericModal').addEventListener('click', function(e) {
             if (e.target === this) closeModal();
@@ -1465,6 +2189,15 @@
 
         document.getElementById('successModal').addEventListener('click', function(e) {
             if (e.target === this) closeSuccessModal();
+        });
+
+        // Close search on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeSearch();
+                closeModal();
+                closeSuccessModal();
+            }
         });
     </script>
 </body>
