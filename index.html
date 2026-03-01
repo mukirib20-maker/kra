@@ -11,202 +11,493 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --kra-red: #e60000;
+            --kra-dark-red: #b30000;
+            --text-dark: #333;
+            --text-gray: #666;
+            --bg-light: #f5f5f5;
+        }
+
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            background-color: #f5f5f5;
-            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: white;
+            color: var(--text-dark);
             line-height: 1.6;
-        }
-
-        /* Top Bar */
-        .top-bar {
-            background-color: #e60000;
-            padding: 8px 0;
-        }
-
-        .top-bar-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .top-bar a {
-            color: white;
-            text-decoration: none;
-            font-size: 12px;
-            font-weight: 500;
-            cursor: pointer;
-        }
-
-        .top-bar a:hover {
-            text-decoration: underline;
-        }
-
-        .accessibility-icons {
-            display: flex;
-            gap: 5px;
-        }
-
-        .accessibility-icon {
-            width: 24px;
-            height: 24px;
-            background-color: rgba(255,255,255,0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 12px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .accessibility-icon:hover {
-            background-color: rgba(255,255,255,0.3);
+            overflow-x: hidden;
         }
 
         /* Main Header */
         .main-header {
             background-color: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 999;
         }
 
         .header-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 15px 20px;
+            padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            height: 80px;
         }
 
-        .logo-nav {
+        .logo-section {
             display: flex;
             align-items: center;
             gap: 40px;
         }
 
         .logo {
-            height: 50px;
+            height: 60px;
             width: auto;
             cursor: pointer;
         }
 
-        .main-nav {
+        /* Desktop Navigation */
+        .desktop-nav {
             display: flex;
             gap: 30px;
         }
 
-        .main-nav a {
-            color: #666;
+        .desktop-nav a {
+            color: var(--text-gray);
             text-decoration: none;
             font-size: 14px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            transition: color 0.3s;
+            padding: 30px 0;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            position: relative;
             cursor: pointer;
         }
 
-        .main-nav a:hover, .main-nav a.active {
-            color: #e60000;
+        .desktop-nav a:hover,
+        .desktop-nav a.active {
+            color: var(--kra-red);
+            border-bottom-color: var(--kra-red);
         }
 
-        .header-right {
+        .header-actions {
             display: flex;
             align-items: center;
             gap: 20px;
         }
 
         .online-services-btn {
-            background-color: transparent;
-            border: 2px solid #e60000;
-            color: #e60000;
-            padding: 8px 20px;
+            background-color: var(--kra-red);
+            color: white;
+            border: 2px solid var(--kra-red);
+            padding: 10px 25px;
             font-size: 13px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
+            text-transform: uppercase;
         }
 
         .online-services-btn:hover {
-            background-color: #e60000;
+            background-color: transparent;
+            color: var(--kra-red);
+        }
+
+        .lang-toggle {
+            display: flex;
+            gap: 5px;
+            font-size: 12px;
+            align-items: center;
+        }
+
+        .lang-toggle span {
+            cursor: pointer;
+            padding: 5px 8px;
+            color: var(--text-gray);
+        }
+
+        .lang-toggle .active {
+            color: var(--kra-red);
+            font-weight: bold;
+            border-bottom: 2px solid var(--kra-red);
+        }
+
+        .search-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .search-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--kra-red);
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            flex-direction: column;
+            gap: 5px;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--kra-red);
+            transition: all 0.3s;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Mobile Sidebar */
+        .mobile-sidebar {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background-color: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transition: left 0.3s ease;
+            z-index: 998;
+            overflow-y: auto;
+            padding-top: 100px;
+        }
+
+        .mobile-sidebar.active {
+            left: 0;
+        }
+
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 997;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .mobile-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .mobile-nav {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mobile-nav a {
+            padding: 15px 20px;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1px solid #eee;
+            text-transform: uppercase;
+            font-size: 14px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+
+        .mobile-nav a:hover {
+            background-color: #f5f5f5;
+            color: var(--kra-red);
+        }
+
+        .mobile-secondary-nav {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid var(--kra-red);
+        }
+
+        .mobile-secondary-nav a {
+            font-size: 13px;
+            color: var(--text-gray);
+            text-transform: none;
+        }
+
+        /* Hero Section - New Design */
+        .hero-section {
+            position: relative;
+            min-height: 600px;
+            background: url('background.webp') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%);
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 60px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-content {
             color: white;
         }
 
-        .language-selector {
+        .hero-content h1 {
+            font-size: 48px;
+            font-weight: 300;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .hero-content h1.bold {
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .hero-action-box {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 100%;
+        }
+
+        .hero-action-box label {
+            display: block;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .action-form {
             display: flex;
-            gap: 10px;
-            font-size: 12px;
-            color: #666;
+            gap: 0;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
         }
 
-        .language-selector span {
+        .action-form select {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            font-size: 14px;
+            color: var(--text-dark);
+            background-color: white;
             cursor: pointer;
-            padding: 2px 5px;
+            outline: none;
+            min-width: 0;
         }
 
-        .language-selector .active {
-            font-weight: bold;
-            color: #333;
-            border-bottom: 2px solid #e60000;
-        }
-
-        .search-icon {
-            width: 20px;
-            height: 20px;
+        .action-form button {
+            background-color: var(--kra-red);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-weight: 600;
             cursor: pointer;
-            color: #e60000;
+            font-size: 14px;
+            text-transform: uppercase;
+            transition: background-color 0.3s;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
-        /* Breadcrumb */
-        .breadcrumb {
+        .action-form button:hover {
+            background-color: var(--kra-dark-red);
+        }
+
+        .hero-mascot {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-mascot img {
+            max-height: 400px;
+            width: auto;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+        }
+
+        /* Important Links Section */
+        .important-links-section {
+            background-color: var(--bg-light);
+            padding: 60px 0;
+        }
+
+        .section-container {
             max-width: 1200px;
-            margin: 20px auto;
+            margin: 0 auto;
             padding: 0 20px;
-            font-size: 13px;
-            color: #666;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            color: var(--text-dark);
+            margin-bottom: 50px;
+            font-weight: 300;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .link-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .link-card-header {
+            background-color: var(--kra-red);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .link-card-header svg {
+            width: 40px;
+            height: 40px;
+            fill: white;
+            flex-shrink: 0;
+        }
+
+        .link-card-header h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .link-card-body {
+            padding: 20px;
+        }
+
+        .link-card-body ul {
+            list-style: none;
+        }
+
+        .link-card-body li {
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .link-card-body li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .link-card-body a {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .link-card-body a:hover {
+            color: var(--kra-red);
+        }
+
+        .link-card-body a::before {
+            content: "›";
+            color: var(--kra-red);
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* Staff Verification Section */
+        .verification-section {
+            background-color: white;
+            padding: 60px 0;
+        }
+
+        .breadcrumb {
+            margin-bottom: 30px;
+            font-size: 14px;
+            color: var(--text-gray);
         }
 
         .breadcrumb a {
-            color: #666;
+            color: var(--text-gray);
             text-decoration: none;
             cursor: pointer;
         }
 
         .breadcrumb a:hover {
-            text-decoration: underline;
+            color: var(--kra-red);
         }
 
         .breadcrumb .current {
-            color: #e60000;
+            color: var(--kra-red);
         }
 
-        /* Main Content */
-        .main-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            min-height: 500px;
-        }
-
-        .page-title {
-            font-size: 28px;
-            color: #666;
-            margin-bottom: 40px;
-            font-weight: normal;
-        }
-
-        .form-container {
+        .verification-box {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .verification-box h2 {
+            color: var(--text-dark);
+            margin-bottom: 30px;
+            font-weight: 300;
+            font-size: 28px;
         }
 
         .form-group {
@@ -216,54 +507,204 @@
         .form-label {
             display: block;
             font-size: 14px;
-            font-weight: bold;
-            color: #333;
+            font-weight: 600;
+            color: var(--text-dark);
             margin-bottom: 8px;
         }
 
         .required {
-            color: #333;
+            color: var(--kra-red);
         }
 
         .form-input {
             width: 100%;
             padding: 12px 15px;
-            border: 1px solid #ccc;
+            border: 1px solid #ddd;
             font-size: 14px;
-            color: #666;
+            color: var(--text-dark);
             transition: border-color 0.3s;
+            border-radius: 4px;
         }
 
         .form-input:focus {
             outline: none;
-            border-color: #e60000;
-        }
-
-        .form-input::placeholder {
-            color: #999;
+            border-color: var(--kra-red);
         }
 
         .helper-text {
             font-size: 13px;
-            color: #666;
+            color: var(--text-gray);
             margin-top: 5px;
             margin-bottom: 8px;
         }
 
-        .search-btn {
-            background-color: #e60000;
+        .submit-btn {
+            background-color: var(--kra-red);
             color: white;
             border: none;
             padding: 15px 50px;
             font-size: 16px;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
-            margin-top: 20px;
+            border-radius: 4px;
             transition: background-color 0.3s;
+            width: 100%;
         }
 
-        .search-btn:hover {
-            background-color: #cc0000;
+        .submit-btn:hover {
+            background-color: var(--kra-dark-red);
+        }
+
+        /* Info Grid Section */
+        .info-section {
+            padding: 60px 0;
+            background-color: var(--bg-light);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .info-card {
+            text-align: center;
+            padding: 30px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .info-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background-color: #ffe6e6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .info-icon svg {
+            width: 40px;
+            height: 40px;
+            fill: var(--kra-red);
+        }
+
+        .info-card h3 {
+            color: var(--text-dark);
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .info-card p {
+            color: var(--text-gray);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Darker Transparent Footer */
+        .footer {
+            background-color: rgba(30, 30, 30, 0.95);
+            color: #aaa;
+            padding: 60px 0 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
+
+        .footer-column h4 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 16px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .footer-column ul li a:hover {
+            color: white;
+        }
+
+        .newsletter-box {
+            margin-top: 20px;
+        }
+
+        .newsletter-box input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #555;
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+
+        .newsletter-box input::placeholder {
+            color: #888;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 40px auto 0;
+            padding: 20px 20px 0;
+            border-top: 1px solid #444;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-bottom p {
+            color: #888;
+            font-size: 13px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .footer-links a:hover {
+            color: white;
         }
 
         /* Modal Styles */
@@ -274,11 +715,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
             justify-content: center;
             align-items: center;
-            animation: fadeIn 0.3s ease;
+            backdrop-filter: blur(4px);
         }
 
         .modal-overlay.active {
@@ -288,15 +729,68 @@
         .modal {
             background-color: white;
             padding: 40px;
-            border-radius: 0;
-            text-align: center;
-            max-width: 400px;
+            border-radius: 8px;
+            max-width: 600px;
             width: 90%;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            animation: slideIn 0.3s ease;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            animation: modalSlide 0.3s ease;
         }
 
-        .modal-icon {
+        @keyframes modalSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal h2 {
+            color: var(--kra-red);
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .modal h3 {
+            color: var(--text-dark);
+            margin: 20px 0 10px;
+            font-size: 18px;
+        }
+
+        .modal p, .modal li {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .modal ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .modal-close {
+            background-color: var(--kra-red);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .modal-close:hover {
+            background-color: var(--kra-dark-red);
+        }
+
+        /* Verification Success Modal */
+        .success-modal .modal-icon {
             width: 80px;
             height: 80px;
             background-color: #4CAF50;
@@ -307,72 +801,37 @@
             justify-content: center;
         }
 
-        .modal-icon::after {
+        .success-modal .modal-icon::after {
             content: "✓";
             color: white;
             font-size: 40px;
             font-weight: bold;
         }
 
-        .modal-title {
-            font-size: 24px;
-            color: #333;
-            margin-bottom: 10px;
-            font-weight: normal;
+        .success-modal h2 {
+            text-align: center;
+            color: var(--text-dark);
         }
 
-        .modal-text {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 30px;
-            line-height: 1.5;
+        .success-modal p {
+            text-align: center;
         }
 
-        .close-btn {
-            background-color: #e60000;
-            color: white;
-            border: none;
-            padding: 12px 40px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .close-btn:hover {
-            background-color: #cc0000;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideIn {
-            from { 
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to { 
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Chatbot Styles */
+        /* Chat Widget */
         .chat-widget {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 30px;
+            right: 30px;
             width: 60px;
             height: 60px;
-            background-color: #e60000;
+            background-color: var(--kra-red);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            z-index: 999;
+            box-shadow: 0 4px 15px rgba(230,0,0,0.4);
+            z-index: 900;
             transition: transform 0.3s;
         }
 
@@ -386,1238 +845,627 @@
             fill: white;
         }
 
-        .chat-container {
-            position: fixed;
-            bottom: 90px;
-            right: 20px;
-            width: 350px;
-            height: 500px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            z-index: 998;
-            display: none;
-            flex-direction: column;
-            overflow: hidden;
-            border: 1px solid #ddd;
-        }
-
-        .chat-container.active {
-            display: flex;
-        }
-
-        .chat-header {
-            background-color: #e60000;
-            color: white;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .chat-header h3 {
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .chat-close {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .chat-messages {
-            flex: 1;
-            overflow-y: auto;
-            padding: 15px;
-            background-color: #f9f9f9;
-        }
-
-        .message {
-            margin-bottom: 15px;
-            max-width: 80%;
-            padding: 10px 15px;
-            border-radius: 18px;
-            font-size: 13px;
-            line-height: 1.4;
-            animation: messageSlide 0.3s ease;
-        }
-
-        @keyframes messageSlide {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .links-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
-        .message.bot {
-            background-color: white;
-            border: 1px solid #e0e0e0;
-            color: #333;
-            align-self: flex-start;
-            margin-right: auto;
-            border-bottom-left-radius: 4px;
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-mascot {
+                display: none;
+            }
+
+            .hero-action-box {
+                margin: 0 auto;
+                max-width: 600px;
+            }
+
+            .info-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
-        .message.user {
-            background-color: #e60000;
-            color: white;
-            align-self: flex-end;
-            margin-left: auto;
-            border-bottom-right-radius: 4px;
-        }
-
-        .chat-input-container {
-            padding: 15px;
-            background-color: white;
-            border-top: 1px solid #eee;
-            display: flex;
-            gap: 10px;
-        }
-
-        .chat-input {
-            flex: 1;
-            padding: 10px 15px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            font-size: 13px;
-            outline: none;
-        }
-
-        .chat-input:focus {
-            border-color: #e60000;
-        }
-
-        .chat-send {
-            background-color: #e60000;
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background-color 0.3s;
-        }
-
-        .chat-send:hover {
-            background-color: #cc0000;
-        }
-
-        .chat-send svg {
-            width: 20px;
-            height: 20px;
-            fill: white;
-        }
-
-        .quick-replies {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 10px;
-            padding: 0 15px 15px;
-            background-color: white;
-        }
-
-        .quick-reply {
-            background-color: #f0f0f0;
-            border: 1px solid #ddd;
-            padding: 6px 12px;
-            border-radius: 15px;
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.3s;
-            color: #333;
-        }
-
-        .quick-reply:hover {
-            background-color: #e60000;
-            color: white;
-            border-color: #e60000;
-        }
-
-        /* Accessibility Widget */
-        .accessibility-widget {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            width: 50px;
-            height: 50px;
-            background-color: #0066cc;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            z-index: 99;
-        }
-
-        .accessibility-widget svg {
-            width: 24px;
-            height: 24px;
-            fill: white;
-        }
-
-        /* Page Specific Styles */
-        .home-hero {
-            background: linear-gradient(135deg, #e60000 0%, #cc0000 100%);
-            color: white;
-            padding: 60px 20px;
-            text-align: center;
-            margin: -40px -20px 40px -20px;
-        }
-
-        .home-hero h1 {
-            font-size: 42px;
-            margin-bottom: 20px;
-            font-weight: 300;
-        }
-
-        .home-hero p {
-            font-size: 18px;
-            max-width: 600px;
-            margin: 0 auto 30px;
-            opacity: 0.95;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .hero-btn {
-            padding: 15px 30px;
-            background-color: white;
-            color: #e60000;
-            text-decoration: none;
-            font-weight: 600;
-            border-radius: 4px;
-            transition: transform 0.3s;
-            cursor: pointer;
-            border: none;
-            font-size: 14px;
-        }
-
-        .hero-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .service-card {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-        }
-
-        .service-icon {
-            width: 60px;
-            height: 60px;
-            background-color: #ffe6e6;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            color: #e60000;
-            font-size: 24px;
-        }
-
-        .service-card h3 {
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 18px;
-        }
-
-        .service-card p {
-            color: #666;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .content-section {
-            background-color: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-
-        .content-section h2 {
-            color: #e60000;
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
-
-        .content-section p {
-            color: #555;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-
-        .content-section ul {
-            margin-left: 20px;
-            color: #555;
-            line-height: 2;
-        }
-
-        .content-section li {
-            margin-bottom: 8px;
-        }
-
-        .online-services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .online-service-item {
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-left: 4px solid #e60000;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .online-service-item:hover {
-            background-color: #ffe6e6;
-            transform: translateX(5px);
-        }
-
-        .online-service-item h4 {
-            color: #333;
-            margin-bottom: 5px;
-            font-size: 16px;
-        }
-
-        .online-service-item p {
-            color: #666;
-            font-size: 13px;
-            margin: 0;
-        }
-
-        .contact-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .contact-card {
-            background-color: #f9f9f9;
-            padding: 25px;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .contact-card h3 {
-            color: #e60000;
-            margin-bottom: 15px;
-        }
-
-        .contact-card p {
-            color: #666;
-            font-size: 14px;
-            line-height: 1.8;
-        }
-
-        .page {
-            display: none;
-        }
-
-        .page.active {
-            display: block;
-            animation: pageFade 0.4s ease;
-        }
-
-        @keyframes pageFade {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Responsive Design */
         @media (max-width: 768px) {
-            .top-bar-content {
-                justify-content: center;
-                gap: 10px;
+            .desktop-nav {
+                display: none;
             }
 
-            .top-bar a {
-                font-size: 11px;
+            .mobile-menu-toggle {
+                display: flex;
             }
 
-            .header-content {
+            .header-actions .online-services-btn,
+            .header-actions .lang-toggle {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 36px;
+            }
+
+            .action-form {
                 flex-direction: column;
-                gap: 20px;
             }
 
-            .logo-nav {
+            .action-form button {
+                width: 100%;
+            }
+
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
                 flex-direction: column;
-                gap: 20px;
-                width: 100%;
-            }
-
-            .main-nav {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 15px;
-            }
-
-            .main-nav a {
-                font-size: 12px;
-            }
-
-            .header-right {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .page-title {
-                font-size: 24px;
-            }
-
-            .form-container {
-                max-width: 100%;
-            }
-
-            .search-btn {
-                width: 100%;
-            }
-
-            .home-hero h1 {
-                font-size: 28px;
-            }
-
-            .chat-container {
-                width: 90%;
-                right: 5%;
-                left: 5%;
-                height: 60vh;
-            }
-
-            .content-section {
-                padding: 25px;
+                text-align: center;
             }
         }
 
         @media (max-width: 480px) {
-            .main-nav {
-                gap: 10px;
+            .hero-content h1 {
+                font-size: 28px;
             }
 
-            .main-nav a {
-                font-size: 11px;
+            .hero-action-box {
+                padding: 20px;
             }
 
-            .online-services-btn {
-                padding: 6px 15px;
-                font-size: 12px;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .hero-btn {
-                width: 100%;
-                max-width: 300px;
+            .link-card-header h3 {
+                font-size: 16px;
             }
         }
     </style>
+<base target="_blank">
 </head>
 <body>
-    <!-- Top Bar -->
-    <div class="top-bar">
-        <div class="top-bar-content">
-            <a onclick="navigateTo('about')">About Us</a>
-            <a onclick="navigateTo('e-procurement')">E - Procurement</a>
-            <a onclick="navigateTo('careers')">Careers</a>
-            <a onclick="navigateTo('publications')">Publications</a>
-            <a onclick="navigateTo('news')">News Centre</a>
-            <a onclick="navigateTo('kesra')">KESRA</a>
-            <a onclick="navigateTo('contact')">Contact Us</a>
-            <div class="accessibility-icons">
-                <div class="accessibility-icon" onclick="changeFontSize('small')">A</div>
-                <div class="accessibility-icon" onclick="changeFontSize('medium')">A</div>
-                <div class="accessibility-icon" onclick="changeFontSize('large')">A</div>
-            </div>
-        </div>
-    </div>
-
     <!-- Main Header -->
     <header class="main-header">
         <div class="header-content">
-            <div class="logo-nav">
-                <img src="https://i.postimg.cc/J0SCVnyf/Chat-GPT-Image-Mar-1-2026-01-21-14-PM.png" alt="Kenya Revenue Authority" class="logo" onclick="navigateTo('home')">
-                <nav class="main-nav">
-                    <a onclick="navigateTo('home')" id="nav-home">HOME</a>
-                    <a onclick="navigateTo('individual')" id="nav-individual">INDIVIDUAL</a>
-                    <a onclick="navigateTo('business')" id="nav-business">BUSINESS</a>
-                    <a onclick="navigateTo('investors')" id="nav-investors">INVESTORS</a>
-                    <a onclick="navigateTo('agents')" id="nav-agents">AGENTS</a>
+            <div class="logo-section">
+                <img src="kra.png" alt="Kenya Revenue Authority" class="logo" onclick="window.location.href='/'">
+                <nav class="desktop-nav">
+                    <a onclick="openModal('home')" class="active">HOME</a>
+                    <a onclick="openModal('individual')">INDIVIDUAL</a>
+                    <a onclick="openModal('business')">BUSINESS</a>
+                    <a onclick="openModal('investors')">INVESTORS</a>
+                    <a onclick="openModal('agents')">AGENTS</a>
                 </nav>
             </div>
-            <div class="header-right">
-                <button class="online-services-btn" onclick="navigateTo('online-services')">Online Services</button>
-                <div class="language-selector">
-                    <span class="active" onclick="changeLanguage('en')">EN</span>
-                    <span onclick="changeLanguage('sw')">SW</span>
+            
+            <div class="header-actions">
+                <button class="online-services-btn" onclick="openModal('online-services')">Online Services</button>
+                <div class="lang-toggle">
+                    <span class="active" onclick="changeLang('en')">EN</span>
+                    <span onclick="changeLang('sw')">SW</span>
                 </div>
-                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" onclick="toggleSearch()">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <path d="m21 21-4.35-4.35"></path>
-                </svg>
+                <button class="search-btn" onclick="openModal('search')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </button>
+                
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" id="mobileMenuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
         </div>
     </header>
 
-    <!-- Search Overlay -->
-    <div id="searchOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1001; justify-content: center; align-items: center;">
-        <div style="background: white; padding: 40px; border-radius: 8px; width: 90%; max-width: 600px;">
-            <h2 style="margin-bottom: 20px; color: #333;">Search KRA</h2>
-            <input type="text" id="searchInput" placeholder="Search for services, information..." style="width: 100%; padding: 15px; font-size: 16px; border: 2px solid #ddd; border-radius: 4px; margin-bottom: 20px;">
-            <div style="display: flex; gap: 10px;">
-                <button onclick="performSearch()" style="flex: 1; padding: 12px; background: #e60000; color: white; border: none; cursor: pointer; font-size: 16px;">Search</button>
-                <button onclick="toggleSearch()" style="padding: 12px 30px; background: #666; color: white; border: none; cursor: pointer; font-size: 16px;">Close</button>
-            </div>
+    <!-- Mobile Sidebar -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <nav class="mobile-nav">
+            <a onclick="openModal('home'); toggleMobileMenu();">Home</a>
+            <a onclick="openModal('individual'); toggleMobileMenu();">Individual</a>
+            <a onclick="openModal('business'); toggleMobileMenu();">Business</a>
+            <a onclick="openModal('investors'); toggleMobileMenu();">Investors</a>
+            <a onclick="openModal('agents'); toggleMobileMenu();">Agents</a>
+            <a onclick="openModal('online-services'); toggleMobileMenu();">Online Services</a>
+        </nav>
+        <div class="mobile-secondary-nav">
+            <a onclick="openModal('about'); toggleMobileMenu();">About Us</a>
+            <a onclick="openModal('e-procurement'); toggleMobileMenu();">E-Procurement</a>
+            <a onclick="openModal('careers'); toggleMobileMenu();">Careers</a>
+            <a onclick="openModal('publications'); toggleMobileMenu();">Publications</a>
+            <a onclick="openModal('news'); toggleMobileMenu();">News Centre</a>
+            <a onclick="openModal('kesra'); toggleMobileMenu();">KESRA</a>
+            <a onclick="openModal('contact'); toggleMobileMenu();">Contact Us</a>
         </div>
     </div>
 
-    <!-- Breadcrumb -->
-    <div class="breadcrumb" id="breadcrumb">
-        <a onclick="navigateTo('home')">Home</a> / <span class="current" id="current-page">Staff Verification</span>
-    </div>
-
-    <!-- Main Content Area -->
-    <main class="main-content" id="main-content">
-        
-        <!-- HOME PAGE -->
-        <div class="page active" id="page-home">
-            <div class="home-hero">
-                <h1>Welcome to Kenya Revenue Authority</h1>
-                <p>Your trusted partner in revenue collection and tax administration. We are committed to providing efficient and transparent services to all taxpayers.</p>
-                <div class="hero-buttons">
-                    <button class="hero-btn" onclick="navigateTo('individual')">Individual Services</button>
-                    <button class="hero-btn" onclick="navigateTo('business')">Business Services</button>
-                    <button class="hero-btn" onclick="navigateTo('online-services')">iTax Portal</button>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Helping you find</h1>
+                <h1 class="bold">Tax & Information</h1>
+                
+                <div class="hero-action-box">
+                    <label for="action">I would like to</label>
+                    <div class="action-form">
+                        <select id="action" onchange="handleServiceSelect(this.value)">
+                            <option value="" disabled selected hidden>Select Service</option>
+                            <option value="https://www.kra.go.ke/services/file-my-returns">File Returns</option>
+                            <option value="https://www.kra.go.ke/business/etims-electronic-tax-invoice-management-system/learn-about-etims/what-is-etims">Register for eTIMS</option>
+                            <option value="https://www.kra.go.ke/">Apply for Tax Amnesty</option>
+                            <option value="https://www.kra.go.ke/services/apply-for-pin">Apply for a KRA PIN</option>
+                            <option value="https://www.kra.go.ke/individual/filing-paying/types-of-taxes/tax-compliance">Apply for a Tax Compliance Certificate (TCC)</option>
+                            <option value="https://www.kra.go.ke/individual/alt-dispute-resolution-adr/learn-about-adr/about-adr">Apply for Alternative Dispute Resolution</option>
+                        </select>
+                        <button onclick="getStarted()">Get Started</button>
+                    </div>
                 </div>
             </div>
-
-            <h2 class="page-title" style="text-align: center; margin-bottom: 20px;">Our Services</h2>
-            <div class="services-grid">
-                <div class="service-card" onclick="navigateTo('individual')">
-                    <div class="service-icon">👤</div>
-                    <h3>Individual Taxpayers</h3>
-                    <p>File your returns, check your PIN status, apply for Tax Compliance Certificates, and manage your tax obligations easily.</p>
-                </div>
-                <div class="service-card" onclick="navigateTo('business')">
-                    <div class="service-icon">🏢</div>
-                    <h3>Business Services</h3>
-                    <p>Register your business, file corporate taxes, manage VAT obligations, and access business tax incentives.</p>
-                </div>
-                <div class="service-card" onclick="navigateTo('online-services')">
-                    <div class="service-icon">💻</div>
-                    <h3>Online Services</h3>
-                    <p>Access iTax portal, verify documents, check application status, and use our mobile services application.</p>
-                </div>
-                <div class="service-card" onclick="navigateTo('staff-verification')">
-                    <div class="service-icon">✓</div>
-                    <h3>Staff Verification</h3>
-                    <p>Verify the authenticity of KRA staff members using our secure verification system.</p>
-                </div>
+            
+            <div class="hero-mascot">
+                <img src="mascot.png" alt="KRA Mascot">
             </div>
         </div>
+    </section>
 
-        <!-- STAFF VERIFICATION PAGE -->
-        <div class="page" id="page-staff-verification">
-            <h1 class="page-title">Staff Identifier</h1>
-            <div class="form-container">
+    <!-- Important Links Section -->
+    <section class="important-links-section">
+        <div class="section-container">
+            <h2 class="section-title">Important Links</h2>
+            <div class="links-grid">
+                
+                <!-- Tutorials Card -->
+                <div class="link-card">
+                    <div class="link-card-header">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        <h3>Tutorials</h3>
+                    </div>
+                    <div class="link-card-body">
+                        <ul>
+                            <li><a onclick="openModal('tutorial-it1')">File Income Tax Return (IT1 Option - Excel)</a></li>
+                            <li><a onclick="openModal('tutorial-nil')">File a NIL Return</a></li>
+                            <li><a onclick="openModal('tutorial-itr')">File Income Tax Return (ITR Option)</a></li>
+                            <li><a onclick="openModal('tutorial-wht')">File Withholding Income Tax Returns</a></li>
+                            <li><a onclick="openModal('tutorial-amended')">File an Amended Income Tax Return</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Online Services Card -->
+                <div class="link-card">
+                    <div class="link-card-header">
+                        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z"/></svg>
+                        <h3>Online Services</h3>
+                    </div>
+                    <div class="link-card-body">
+                        <ul>
+                            <li><a onclick="openModal('itax')">iTax</a></li>
+                            <li><a onclick="openModal('icms')">iCMS</a></li>
+                            <li><a onclick="openModal('etims')">eTIMS</a></li>
+                            <li><a onclick="openModal('ibid')">iBid - Customs Auction</a></li>
+                            <li><a onclick="openModal('mservice')">M-Service Mobile App</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Popular Documents Card -->
+                <div class="link-card">
+                    <div class="link-card-header">
+                        <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                        <h3>Popular Documents</h3>
+                    </div>
+                    <div class="link-card-body">
+                        <ul>
+                            <li><a onclick="openModal('form88')">Passenger Declaration Form (Form-88)</a></li>
+                            <li><a onclick="openModal('excise-importers')">Registration of Excise Importers</a></li>
+                            <li><a onclick="openModal('excise-manufacturers')">Licensing of Excise Manufacturers</a></li>
+                            <li><a onclick="openModal('income-exemption')">Income Tax Exemption Application Form</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Popular Resources Card -->
+                <div class="link-card">
+                    <div class="link-card-header">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+                        <h3>Popular Resources</h3>
+                    </div>
+                    <div class="link-card-body">
+                        <ul>
+                            <li><a onclick="openModal('adr')">Alternative Dispute Resolution (ADR)</a></li>
+                            <li><a onclick="openModal('aeo')">Authorised Economic Operator</a></li>
+                            <li><a onclick="openModal('methanol')">Taxpayers Guidelines: Application for Methanol Import Permit</a></li>
+                            <li><a onclick="openModal('micro-distillers')">Taxpayer Guidelines for the Licensing of Micro-Distillers in Kenya</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Staff Verification Section -->
+    <section class="verification-section">
+        <div class="section-container">
+            <div class="breadcrumb">
+                <a onclick="window.location.href='/'">Home</a> / <span class="current">Staff Verification</span>
+            </div>
+            
+            <div class="verification-box">
+                <h2>Staff Identifier</h2>
                 <form id="verificationForm">
                     <div class="form-group">
-                        <label class="form-label">Staff National ID No.<span class="required">(Required)</span></label>
+                        <label class="form-label">Staff National ID No. <span class="required">(Required)</span></label>
                         <input type="text" class="form-input" id="nationalId" placeholder="Numerics only" required pattern="[0-9]*">
                     </div>
 
                     <div class="form-group">
                         <label class="form-label">Your Phone Number</label>
                         <p class="helper-text">For KRA to contact you please enter your phone number below.</p>
-                        <input type="tel" class="form-input" id="phoneNumber" placeholder="Enter you Phone Number" required>
+                        <input type="tel" class="form-input" id="phoneNumber" placeholder="Enter your Phone Number" required>
                     </div>
 
-                    <button type="submit" class="search-btn">Search</button>
+                    <button type="submit" class="submit-btn">Search</button>
                 </form>
             </div>
         </div>
+    </section>
 
-        <!-- INDIVIDUAL PAGE -->
-        <div class="page" id="page-individual">
-            <h1 class="page-title">Individual Taxpayer Services</h1>
-            <div class="content-section">
-                <h2>PIN Registration</h2>
-                <p>The Personal Identification Number (PIN) is a mandatory requirement for all taxpayers in Kenya. Apply for your PIN online through our iTax portal.</p>
-                <ul>
-                    <li>New PIN registration for Kenyan citizens</li>
-                    <li>Alien PIN registration for non-citizens</li>
-                    <li>Company PIN registration</li>
-                    <li>PIN retrieval and certificate reprinting</li>
-                </ul>
-            </div>
-            <div class="content-section">
-                <h2>Tax Obligations</h2>
-                <p>Understand your tax obligations as an individual taxpayer:</p>
-                <ul>
-                    <li><strong>Income Tax:</strong> For employed and self-employed individuals</li>
-                    <li><strong>Turnover Tax (TOT):</strong> For businesses with turnover between KSh 1M and KSh 25M</li>
-                    <li><strong>Monthly Rental Income (MRI):</strong> For rental income earners</li>
-                    <li><strong>Capital Gains Tax:</strong> On transfer of property</li>
-                </ul>
-            </div>
-            <div class="content-section">
-                <h2>Returns Filing</h2>
-                <p>File your tax returns easily through iTax. Deadlines:</p>
-                <ul>
-                    <li>Individual Income Tax: 30th June annually</li>
-                    <li>Turnover Tax: 20th of each month</li>
-                    <li>Monthly Rental Income: 20th of each month</li>
-                    <li>Nil returns can be filed for non-active taxpayers</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- BUSINESS PAGE -->
-        <div class="page" id="page-business">
-            <h1 class="page-title">Business Services</h1>
-            <div class="content-section">
-                <h2>Business Registration</h2>
-                <p>Register your business for tax purposes and obtain necessary tax obligations based on your business type.</p>
-                <ul>
-                    <li>Sole proprietorship registration</li>
-                    <li>Partnership registration</li>
-                    <li>Corporate entity registration</li>
-                    <li>NGO and charitable organization registration</li>
-                </ul>
-            </div>
-            <div class="content-section">
-                <h2>Value Added Tax (VAT)</h2>
-                <p>VAT is charged on supply of taxable goods and services. Current VAT rate is 16%.</p>
-                <ul>
-                    <li>Mandatory registration for businesses with turnover above KSh 5M annually</li>
-                    <li>Voluntary registration available below threshold</li>
-                    <li>Monthly VAT returns due by 20th of following month</li>
-                    <li>Electronic Tax Invoice Management System (eTIMS) compliance required</li>
-                </ul>
-            </div>
-            <div class="content-section">
-                <h2>Excise Duty</h2>
-                <p>Excise duty is imposed on specific goods manufactured in or imported into Kenya:</p>
-                <ul>
-                    <li>Alcoholic beverages and tobacco products</li>
-                    <li>Petroleum products</li>
-                    <li>Motor vehicles</li>
-                    <li>Cosmetics and beauty products</li>
-                    <li>Financial services (excise duty on fees and commissions)</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- ONLINE SERVICES PAGE -->
-        <div class="page" id="page-online-services">
-            <h1 class="page-title">KRA Online Services</h1>
-            <div class="content-section">
-                <h2>iTax Portal</h2>
-                <p>Access all tax services through our integrated iTax platform. Register, file returns, make payments, and manage your tax account.</p>
-                <div class="online-services-grid">
-                    <div class="online-service-item" onclick="showServiceInfo('pin-checker')">
-                        <h4>PIN Checker</h4>
-                        <p>Verify authenticity of any KRA PIN</p>
+    <!-- Info Grid Section -->
+    <section class="info-section">
+        <div class="section-container">
+            <h2 class="section-title">Helping Tax Payers</h2>
+            <div class="info-grid">
+                <div class="info-card" onclick="openModal('itax-tutorials')">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                     </div>
-                    <div class="online-service-item" onclick="showServiceInfo('tcc-checker')">
-                        <h4>TCC Checker</h4>
-                        <p>Verify Tax Compliance Certificates</p>
+                    <h3>iTax Tutorials</h3>
+                    <p>Learn how to use iTax platform with our comprehensive video and document tutorials.</p>
+                </div>
+                
+                <div class="info-card" onclick="openModal('glossary')">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
                     </div>
-                    <div class="online-service-item" onclick="showServiceInfo('wht-checker')">
-                        <h4>WHT Checker</h4>
-                        <p>Verify Withholding Tax Certificates</p>
+                    <h3>Glossary</h3>
+                    <p>Understand tax terminology and definitions used in Kenyan tax laws and regulations.</p>
+                </div>
+                
+                <div class="info-card" onclick="openModal('faqs')">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24"><path d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-4 6V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10c.55 0 1-.45 1-1z"/></svg>
                     </div>
-                    <div class="online-service-item" onclick="showServiceInfo('agent-checker')">
-                        <h4>Tax Agent Checker</h4>
-                        <p>Verify authorized KRA agents</p>
+                    <h3>FAQs</h3>
+                    <p>Find answers to frequently asked questions about tax registration, filing, and payments.</p>
+                </div>
+                
+                <div class="info-card" onclick="openModal('complaints')">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/></svg>
                     </div>
-                    <div class="online-service-item" onclick="showServiceInfo('status-checker')">
-                        <h4>Case Status Checker</h4>
-                        <p>Check status of your applications</p>
-                    </div>
-                    <div class="online-service-item" onclick="showServiceInfo('egms')">
-                        <h4>EGMS</h4>
-                        <p>Excisable Goods Management System</p>
-                    </div>
+                    <h3>Complaints</h3>
+                    <p>Submit complaints or feedback about our services and track resolution status.</p>
                 </div>
             </div>
-            <div class="content-section">
-                <h2>KRA M-Service App</h2>
-                <p>Download our mobile application for convenient access to tax services on your smartphone.</p>
-                <ul>
-                    <li>File nil returns</li>
-                    <li>Pay Monthly Rental Income and Turnover Tax</li>
-                    <li>Verify PIN and TCC</li>
-                    <li>Staff verification (Jua For Sure)</li>
-                    <li>Available on Google Play Store and App Store</li>
-                </ul>
-            </div>
         </div>
+    </section>
 
-        <!-- INVESTORS PAGE -->
-        <div class="page" id="page-investors">
-            <h1 class="page-title">Investor Information</h1>
-            <div class="content-section">
-                <h2>Investment Opportunities</h2>
-                <p>Kenya offers attractive investment opportunities with various tax incentives for investors.</p>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>About KRA</h4>
                 <ul>
-                    <li>Export Processing Zones (EPZ) benefits</li>
-                    <li>Special Economic Zones (SEZ) incentives</li>
-                    <li>Manufacturing under bond</li>
-                    <li>Investment allowances and deductions</li>
+                    <li><a onclick="openModal('who-we-are')">Who We Are</a></li>
+                    <li><a onclick="openModal('corporate-plan')">KRA 9th Corporate Plan</a></li>
+                    <li><a onclick="openModal('security-policy')">KRA Information Security Policy</a></li>
+                    <li><a onclick="openModal('data-privacy')">Data Privacy Statement</a></li>
+                    <li><a onclick="openModal('treaties')">Treaties & International Policy</a></li>
+                    <li><a onclick="openModal('exchange-info')">Exchange of Information</a></li>
+                    <li><a onclick="openModal('quality-policy')">KRA Quality Policy Statement</a></li>
+                    <li><a onclick="openModal('staff-app')">Staff Mobile Application</a></li>
+                    <li><a onclick="openModal('icdp')">International Capacity Development Program (ICDP)</a></li>
+                    <li><a onclick="openModal('service-charter')">KRA Service Charter</a></li>
                 </ul>
             </div>
-            <div class="content-section">
-                <h2>Tax Treaties</h2>
-                <p>Kenya has signed Double Taxation Agreements (DTAs) with several countries to avoid double taxation:</p>
+            
+            <div class="footer-column">
+                <h4>Related Websites</h4>
                 <ul>
-                    <li>United Kingdom, Germany, France, Canada</li>
-                    <li>India, South Africa, Zambia, Norway</li>
-                    <li>Denmark, Sweden, Iran, Qatar, UAE</li>
-                    <li>And more...</li>
+                    <li><a onclick="openModal('tax-summit')">Annual Tax Summit</a></li>
+                    <li><a onclick="openModal('treasury')">The National Treasury</a></li>
+                    <li><a onclick="openModal('keninvest')">KenInvest</a></li>
+                    <li><a onclick="openModal('pfm')">Public Financial Mgt Reforms</a></li>
                 </ul>
             </div>
-        </div>
-
-        <!-- AGENTS PAGE -->
-        <div class="page" id="page-agents">
-            <h1 class="page-title">Tax Agents</h1>
-            <div class="content-section">
-                <h2>Become a Tax Agent</h2>
-                <p>Register as a certified KRA tax agent to assist taxpayers with compliance matters.</p>
+            
+            <div class="footer-column">
+                <h4>Community</h4>
                 <ul>
-                    <li>Professional qualifications required</li>
-                    <li>KRA certification process</li>
-                    <li>Annual renewal requirements</li>
-                    <li>Code of conduct compliance</li>
+                    <li><a onclick="openModal('facts')">Facts About KRA</a></li>
+                    <li><a onclick="openModal('community')">Community Engagement</a></li>
+                    <li><a onclick="openModal('csr')">Corporate Social Responsibility</a></li>
                 </ul>
             </div>
-            <div class="content-section">
-                <h2>Agent Services</h2>
-                <p>Authorized tax agents can provide:</p>
-                <ul>
-                    <li>Tax consultation and advisory</li>
-                    <li>Return preparation and filing</li>
-                    <li>Tax planning services</li>
-                    <li>Representation before KRA</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- ABOUT PAGE -->
-        <div class="page" id="page-about">
-            <h1 class="page-title">About KRA</h1>
-            <div class="content-section">
-                <h2>Who We Are</h2>
-                <p>The Kenya Revenue Authority (KRA) was established by an Act of Parliament, the Kenya Revenue Authority Act, which became effective on 1 July 1995. We are responsible for the assessment, collection and accounting of all revenues due to the Government of Kenya.</p>
-                <p>Our vision is to be the leading revenue authority in the world, recognized for professionalism, integrity, and fairness.</p>
-            </div>
-            <div class="content-section">
-                <h2>Our Mandate</h2>
-                <ul>
-                    <li>To assess, collect and account for all revenues in accordance with the written laws</li>
-                    <li>To advise on matters relating to administration and collection of revenue</li>
-                    <li>To perform such other functions relating to revenue as directed by the Cabinet Secretary</li>
-                    <li>To combat tax evasion and revenue leakage</li>
-                    <li>To facilitate trade and movement of people across borders</li>
-                </ul>
-            </div>
-            <div class="content-section">
-                <h2>Leadership</h2>
-                <p><strong>Chairperson of the Board:</strong> Anthony Mwaura</p>
-                <p><strong>Commissioner General:</strong> Humphrey Wattanga</p>
-                <p><strong>Headquarters:</strong> Times Tower, Haile Selassie Avenue, Nairobi</p>
-            </div>
-        </div>
-
-        <!-- CONTACT PAGE -->
-        <div class="page" id="page-contact">
-            <h1 class="page-title">Contact Us</h1>
-            <div class="contact-info">
-                <div class="contact-card">
-                    <h3>📞 Call Center</h3>
-                    <p>0711 099 999<br>020 4999 999<br>020 2390 919</p>
-                    <p>Available Monday-Friday<br>8:00 AM - 5:00 PM</p>
-                </div>
-                <div class="contact-card">
-                    <h3>📧 Email</h3>
-                    <p>callcentre@kra.go.ke<br>dtdonlinesupport@kra.go.ke<br>customs@kra.go.ke</p>
-                </div>
-                <div class="contact-card">
-                    <h3>📍 Headquarters</h3>
-                    <p>Times Tower Building<br>Haile Selassie Avenue<br>P.O. Box 48240 - 00100<br>Nairobi, Kenya</p>
-                </div>
-                <div class="contact-card">
-                    <h3>🌐 Social Media</h3>
-                    <p>Facebook: @KenyaRevenueAuthority<br>Twitter: @KRACare<br>Instagram: @kra_kenya</p>
+            
+            <div class="footer-column">
+                <h4>Stay Connected</h4>
+                <p style="color: #aaa; font-size: 14px; margin-bottom: 15px;">Never miss a thing about KRA</p>
+                <div class="newsletter-box">
+                    <input type="email" placeholder="Email address">
                 </div>
             </div>
-            <div class="content-section" style="margin-top: 40px;">
-                <h2>Regional Offices</h2>
-                <p>We have regional offices across Kenya to serve you better:</p>
-                <ul>
-                    <li><strong>Nairobi Region:</strong> Times Tower, Nairobi</li>
-                    <li><strong>Central Region:</strong> Nyeri</li>
-                    <li><strong>North Rift:</strong> Eldoret</li>
-                    <li><strong>South Rift:</strong> Nakuru</li>
-                    <li><strong>Western:</strong> Kisumu</li>
-                    <li><strong>Southern:</strong> Mombasa</li>
-                    <li><strong>Northern:</strong> Embu</li>
-                </ul>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; Kenya Revenue Authority 2026</p>
+            <div class="footer-links">
+                <a onclick="openModal('privacy-policy')">Privacy Policy</a>
+                <a onclick="openModal('terms')">Terms and Conditions</a>
             </div>
         </div>
+    </footer>
 
-        <!-- OTHER PAGES -->
-        <div class="page" id="page-e-procurement">
-            <h1 class="page-title">E-Procurement</h1>
-            <div class="content-section">
-                <h2>Procurement Opportunities</h2>
-                <p>Access KRA procurement tenders and supplier registration information.</p>
-                <ul>
-                    <li>Current tenders and RFQs</li>
-                    <li>Supplier registration requirements</li>
-                    <li>Bid submission guidelines</li>
-                    <li>Contract awards information</li>
-                </ul>
-            </div>
+    <!-- Generic Modal -->
+    <div class="modal-overlay" id="genericModal">
+        <div class="modal" id="modalContent">
+            <h2 id="modalTitle">Title</h2>
+            <div id="modalBody">Content</div>
+            <button class="modal-close" onclick="closeModal()">Close</button>
         </div>
+    </div>
 
-        <div class="page" id="page-careers">
-            <h1 class="page-title">Careers at KRA</h1>
-            <div class="content-section">
-                <h2>Join Our Team</h2>
-                <p>Build your career with Kenya's leading revenue authority. We offer competitive packages and growth opportunities.</p>
-                <ul>
-                    <li>Current job vacancies</li>
-                    <li>Graduate trainee programs</li>
-                    <li>Internship opportunities</li>
-                    <li>Application guidelines</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="page" id="page-publications">
-            <h1 class="page-title">Publications</h1>
-            <div class="content-section">
-                <h2>Official Documents</h2>
-                <p>Access KRA official publications and reports:</p>
-                <ul>
-                    <li>Annual reports and financial statements</li>
-                    <li>Tax statistics and economic reports</li>
-                    <li>Corporate plans and strategic documents</li>
-                    <li>Tax laws and regulations</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="page" id="page-news">
-            <h1 class="page-title">News Centre</h1>
-            <div class="content-section">
-                <h2>Latest Updates</h2>
-                <p>Stay informed with the latest news from KRA:</p>
-                <ul>
-                    <li>Press releases and announcements</li>
-                    <li>Tax law changes and updates</li>
-                    <li>Public notices and tenders</li>
-                    <li>Media gallery and events</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="page" id="page-kesra">
-            <h1 class="page-title">KESRA</h1>
-            <div class="content-section">
-                <h2>Kenya School of Revenue Administration</h2>
-                <p>KESRA is KRA's premier training school specializing in Tax and Customs Administration, Fiscal Policy and Management.</p>
-                <ul>
-                    <li>Professional courses in taxation</li>
-                    <li>Customs and border control training</li>
-                    <li>Fiscal policy and management programs</li>
-                    <li>WCO accredited Regional Training Centre</li>
-                </ul>
-            </div>
-        </div>
-
-    </main>
-
-    <!-- Verification Modal -->
-    <div class="modal-overlay" id="verificationModal">
-        <div class="modal">
+    <!-- Verification Success Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal success-modal">
             <div class="modal-icon"></div>
-            <h2 class="modal-title">Verified</h2>
-            <p class="modal-text">The staff member has been successfully verified in our system.</p>
-            <button class="close-btn" onclick="closeModal()">Close</button>
+            <h2>Verified</h2>
+            <p>The staff member has been successfully verified in our system.</p>
+            <button class="modal-close" onclick="closeSuccessModal()">Close</button>
         </div>
     </div>
 
-    <!-- Service Info Modal -->
-    <div class="modal-overlay" id="serviceModal">
-        <div class="modal" style="max-width: 500px;">
-            <h2 class="modal-title" id="serviceModalTitle" style="color: #e60000;">Service Information</h2>
-            <p class="modal-text" id="serviceModalText">Details about this service will be displayed here.</p>
-            <button class="close-btn" onclick="closeServiceModal()">Close</button>
-        </div>
-    </div>
-
-    <!-- Chatbot -->
-    <div class="chat-widget" onclick="toggleChat()">
+    <!-- Chat Widget -->
+    <div class="chat-widget" onclick="openModal('chat')">
         <svg viewBox="0 0 24 24">
             <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
         </svg>
     </div>
 
-    <div class="chat-container" id="chatContainer">
-        <div class="chat-header">
-            <h3>KRA Virtual Assistant</h3>
-            <button class="chat-close" onclick="toggleChat()">×</button>
-        </div>
-        <div class="chat-messages" id="chatMessages">
-            <div class="message bot">Hello! Welcome to KRA. How can I assist you today? I can help you with:</div>
-        </div>
-        <div class="quick-replies" id="quickReplies">
-            <button class="quick-reply" onclick="sendQuickReply('How do I file returns?')">File Returns</button>
-            <button class="quick-reply" onclick="sendQuickReply('How do I get a PIN?')">Get PIN</button>
-            <button class="quick-reply" onclick="sendQuickReply('Check TCC status')">Check TCC</button>
-            <button class="quick-reply" onclick="sendQuickReply('Contact support')">Contact</button>
-        </div>
-        <div class="chat-input-container">
-            <input type="text" class="chat-input" id="chatInput" placeholder="Type your message..." onkeypress="handleChatKeypress(event)">
-            <button class="chat-send" onclick="sendChatMessage()">
-                <svg viewBox="0 0 24 24">
-                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-                </svg>
-            </button>
-        </div>
-    </div>
-
-    <!-- Accessibility Widget -->
-    <div class="accessibility-widget">
-        <svg viewBox="0 0 24 24">
-            <path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z"/>
-        </svg>
-    </div>
-
     <script>
-        // Navigation System
-        function navigateTo(page) {
-            // Hide all pages
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            
-            // Show selected page
-            const selectedPage = document.getElementById('page-' + page);
-            if (selectedPage) {
-                selectedPage.classList.add('active');
+        // Content database for modals
+        const modalContent = {
+            'home': {
+                title: 'Welcome to KRA',
+                body: '<p>The Kenya Revenue Authority (KRA) is the principal revenue collection agency for the Government of Kenya.</p>'
+            },
+            'tutorial-it1': {
+                title: 'File Income Tax Return (IT1 Option - Excel)',
+                body: '<p>The IT1 Excel option allows you to file your Income Tax Return using a downloadable Excel template.</p><h3>Steps:</h3><ol><li>Login to iTax</li><li>Select "Returns" > "File Return"</li><li>Choose "Income Tax - Resident Individual"</li><li>Download the Excel template</li><li>Fill in your details</li><li>Upload the completed file</li><li>Submit and download acknowledgment receipt</li></ol>'
+            },
+            'tutorial-nil': {
+                title: 'File a NIL Return',
+                body: '<p>If you have no income to declare for the year, you should file a NIL return.</p><h3>Process:</h3><ol><li>Login to iTax with your PIN</li><li>Click "Returns" > "File NIL Return"</li><li>Select the tax obligation</li><li>Select the tax period</li><li>Submit the NIL return</li></ol><p><strong>Note:</strong> Filing NIL returns is mandatory even if you had no income.</p>'
+            },
+            'tutorial-itr': {
+                title: 'File Income Tax Return (ITR Option)',
+                body: '<p>The ITR (Income Tax Return) online option allows you to file directly on the iTax portal without downloading templates.</p><h3>Advantages:</h3><ul><li>Real-time validation</li><li>Auto-calculation of tax</li><li>Immediate acknowledgment</li><li>Integration with employer data</li></ul>'
+            },
+            'tutorial-wht': {
+                title: 'File Withholding Income Tax Returns',
+                body: '<p>Withholding Tax (WHT) is deducted at source from payments made to suppliers.</p><h3>Who should file:</h3><ul><li>Employers (PAYE)</li><li>Contractors paying subcontractors</li><li>Professional service providers</li><li>Rental income payers</li></ul><h3>Due Date:</h3><p>20th of the month following the month of deduction.</p>'
+            },
+            'tutorial-amended': {
+                title: 'File an Amended Income Tax Return',
+                body: '<p>If you discover errors in your filed return, you can file an amended return.</p><h3>Process:</h3><ol><li>Login to iTax</li><li>Go to "Returns" > "File Amended Return"</li><li>Select the return to amend</li><li>Make necessary corrections</li><li>Submit with explanation for amendment</li></ol><p><strong>Note:</strong> Amended returns may trigger additional tax or refunds.</p>'
+            },
+            'itax': {
+                title: 'iTax Portal',
+                body: '<p>iTax is KRA\'s integrated tax management system.</p><h3>Features:</h3><ul><li>Online registration</li><li>Return filing</li><li>Tax payments</li><li>Compliance monitoring</li><li>Refund applications</li><li>TCC applications</li></ul><p>Access: <a href="https://itax.kra.go.ke" target="_blank">itax.kra.go.ke</a></p>'
+            },
+            'icms': {
+                title: 'iCMS - Integrated Customs Management System',
+                body: '<p>iCMS is KRA\'s system for managing customs and border control operations.</p><h3>Services:</h3><ul><li>Import/export declarations</li><li>Customs duty payments</li><li>Manifest processing</li><li>Transit monitoring</li><li>Goods clearance</li></ul>'
+            },
+            'etims': {
+                title: 'eTIMS - Electronic Tax Invoice Management System',
+                body: '<p>eTIMS is a system for real-time invoice transmission to KRA.</p><h3>Requirements:</h3><ul><li>All VAT registered taxpayers must comply</li><li>Invoices must be generated through eTIMS</li><li>Real-time reporting to KRA</li></ul><h3>Benefits:</h3><p>Reduces tax evasion, simplifies audits, and improves compliance.</p>'
+            },
+            'ibid': {
+                title: 'iBid - Customs Auction',
+                body: '<p>iBid is KRA\'s online platform for auctioning seized and unclaimed goods.</p><h3>How to Participate:</h3><ol><li>Register on iBid portal</li><li>Browse available items</li><li>Place your bid</li><li>Winning bidders make payment</li><li>Collect goods from designated station</li></ol>'
+            },
+            'mservice': {
+                title: 'KRA M-Service Mobile App',
+                body: '<p>Access KRA services on your smartphone.</p><h3>Features:</h3><ul><li>File NIL returns</li><li>Pay taxes via M-PESA</li><li>Verify PIN and TCC</li><li>Track application status</li><li>Staff verification</li></ul><h3>Download:</h3><p>Available on Google Play Store and Apple App Store</p>'
+            },
+            'form88': {
+                title: 'Passenger Declaration Form (Form-88)',
+                body: '<p>Form-88 is used by international passengers to declare goods being brought into Kenya.</p><h3>When to Use:</h3><ul><li>Goods exceeding duty-free allowances</li><li>Commercial goods</li><li>Restricted/prohibited items</li><li>Cash exceeding USD 10,000</li></ul><h3>Submission:</h3><p>Submit to customs officer at port of entry.</p>'
+            },
+            'excise-importers': {
+                title: 'Registration of Excise Importers',
+                body: '<p>Requirements for importing excisable goods:</p><h3>Required Documents:</h3><ul><li>Company registration certificate</li><li>KRA PIN certificate</li><li>Trade license</li><li>Bank reference</li><li>Storage facility details</li></ul><h3>Process:</h3><p>Apply through iTax under "Excise Registration" module.</p>'
+            },
+            'excise-manufacturers': {
+                title: 'Licensing of Excise Manufacturers',
+                body: '<p>Licensing requirements for manufacturing excisable goods in Kenya.</p><h3>Categories:</h3><ul><li>Alcoholic beverages</li><li>Tobacco products</li><li>Non-alcoholic beverages</li><li>Cosmetics</li></ul><h3>Requirements:</h3><p>Factory inspection, security bond, compliance with standards.</p>'
+            },
+            'income-exemption': {
+                title: 'Income Tax Exemption Application Form',
+                body: '<p>Application for exemption from income tax under various provisions of the Income Tax Act.</p><h3>Who Qualifies:</h3><ul><li>Charitable organizations</li><li>Diplomatic missions</li><li>International organizations</li><li>Specific government projects</li></ul><h3>Process:</h3><p>Submit application to Commissioner with supporting documents.</p>'
+            },
+            'adr': {
+                title: 'Alternative Dispute Resolution (ADR)',
+                body: '<p>ADR provides a faster, less costly way to resolve tax disputes.</p><h3>Benefits:</h3><ul><li>Faster resolution (90 days target)</li><li>Lower costs than litigation</li><li>Confidential process</li><li>Preserves business relationships</li></ul><h3>Eligibility:</h3><p>Disputes relating to tax assessments, penalties, and interest.</p>'
+            },
+            'aeo': {
+                title: 'Authorised Economic Operator (AEO)',
+                body: '<p>AEO is a program that gives compliant traders benefits and simplifications.</p><h3>Benefits:</h3><ul><li>Reduced customs inspections</li><li>Priority clearance</li><li>Simplified procedures</li><li>Deferred duty payments</li></ul><h3>Requirements:</h3><p>Compliance history, financial solvency, security standards.</p>'
+            },
+            'methanol': {
+                title: 'Methanol Import Permit Guidelines',
+                body: '<p>Guidelines for applying for methanol import permits.</p><h3>Requirements:</h3><ul><li>Valid KRA PIN</li><li>Excise license (if applicable)</li><li>End-user certificate</li><li>Safety storage proof</li></ul><h3>Application:</h3><p>Submit through KRA portal with supporting documents.</p>'
+            },
+            'micro-distillers': {
+                title: 'Micro-Distillers Licensing Guidelines',
+                body: '<p>Guidelines for licensing small-scale alcohol distillers in Kenya.</p><h3>Categories:</h3><ul><li>Micro-distillers (production < 10,000L/year)</li><li>Small distillers (10,000L - 50,000L/year)</li></ul><h3>Requirements:</h3><p>Business registration, health clearance, excise compliance, security bond.</p>'
+            },
+            'individual': {
+                title: 'Individual Taxpayer Services',
+                body: '<p>Services for individual taxpayers including PIN registration, filing returns, and compliance.</p>'
+            },
+            'business': {
+                title: 'Business Services',
+                body: '<p>Tax services for businesses including VAT, corporate tax, and excise duty.</p>'
+            },
+            'investors': {
+                title: 'Investor Information',
+                body: '<p>Investment opportunities and tax incentives in Kenya.</p>'
+            },
+            'agents': {
+                title: 'Tax Agents',
+                body: '<p>Information for certified tax agents and registration requirements.</p>'
+            },
+            'online-services': {
+                title: 'KRA Online Services',
+                body: '<p>Access iTax, verification tools, and mobile services.</p>'
+            },
+            'who-we-are': {
+                title: 'Who We Are',
+                body: '<p>KRA is Kenya\'s principal revenue collection agency established in 1995.</p>'
+            },
+            'data-privacy': {
+                title: 'Data Privacy Statement',
+                body: '<p>KRA complies with the Data Protection Act, 2019 to protect your personal information.</p>'
+            },
+            'privacy-policy': {
+                title: 'Privacy Policy',
+                body: '<p>Detailed privacy policy in compliance with Kenyan data protection laws.</p>'
+            },
+            'terms': {
+                title: 'Terms and Conditions',
+                body: '<p>Terms of use for KRA services and platforms.</p>'
+            },
+            'itax-tutorials': {
+                title: 'iTax Tutorials',
+                body: '<p>Video and document tutorials for using iTax platform.</p>'
+            },
+            'glossary': {
+                title: 'Tax Glossary',
+                body: '<p>Definitions of common tax terms and terminology.</p>'
+            },
+            'faqs': {
+                title: 'FAQs',
+                body: '<p>Frequently asked questions about tax services.</p>'
+            },
+            'complaints': {
+                title: 'Complaints',
+                body: '<p>Submit complaints and feedback about KRA services.</p>'
+            },
+            'chat': {
+                title: 'KRA Virtual Assistant',
+                body: '<p>Our chatbot is currently under maintenance. Please call 0711 099 999 for assistance.</p>'
+            },
+            'search': {
+                title: 'Search',
+                body: '<p>Search functionality coming soon.</p>'
             }
+        };
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const sidebar = document.getElementById('mobileSidebar');
+            const overlay = document.getElementById('mobileOverlay');
+            const toggle = document.getElementById('mobileMenuToggle');
             
-            // Update breadcrumb
-            updateBreadcrumb(page);
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            toggle.classList.toggle('active');
             
-            // Update active nav
-            document.querySelectorAll('.main-nav a').forEach(link => link.classList.remove('active'));
-            const navLink = document.getElementById('nav-' + page);
-            if (navLink) navLink.classList.add('active');
-            
-            // Scroll to top
-            window.scrollTo(0, 0);
+            document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
         }
 
-        function updateBreadcrumb(page) {
-            const pageNames = {
-                'home': 'Home',
-                'staff-verification': 'Staff Verification',
-                'individual': 'Individual',
-                'business': 'Business',
-                'online-services': 'Online Services',
-                'investors': 'Investors',
-                'agents': 'Agents',
-                'about': 'About Us',
-                'contact': 'Contact Us',
-                'e-procurement': 'E-Procurement',
-                'careers': 'Careers',
-                'publications': 'Publications',
-                'news': 'News Centre',
-                'kesra': 'KESRA'
-            };
-            
-            const currentPage = document.getElementById('current-page');
-            if (page === 'home') {
-                currentPage.textContent = 'Welcome';
-            } else {
-                currentPage.textContent = pageNames[page] || page;
+        // Modal functions
+        function openModal(contentKey) {
+            const content = modalContent[contentKey];
+            if (content) {
+                document.getElementById('modalTitle').textContent = content.title;
+                document.getElementById('modalBody').innerHTML = content.body;
+                document.getElementById('genericModal').classList.add('active');
+                document.body.style.overflow = 'hidden';
             }
         }
-
-        // Staff Verification Form
-        document.getElementById('verificationForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const nationalId = document.getElementById('nationalId').value;
-            const phoneNumber = document.getElementById('phoneNumber').value;
-            
-            if (nationalId && phoneNumber) {
-                document.getElementById('verificationModal').classList.add('active');
-            }
-        });
 
         function closeModal() {
-            document.getElementById('verificationModal').classList.remove('active');
+            document.getElementById('genericModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Verification form
+        document.getElementById('verificationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('successModal').classList.add('active');
+        });
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.remove('active');
             document.getElementById('verificationForm').reset();
         }
 
-        // Service Info Modal
-        function showServiceInfo(service) {
-            const serviceInfo = {
-                'pin-checker': {
-                    title: 'PIN Checker',
-                    text: 'The PIN Checker allows you to confirm whether a particular PIN is genuine. Enter the PIN number to verify its authenticity and registration details.'
-                },
-                'tcc-checker': {
-                    title: 'Tax Compliance Certificate Checker',
-                    text: 'Verify the validity of any Tax Compliance Certificate (TCC). Enter the TCC number to confirm if it is genuine and active.'
-                },
-                'wht-checker': {
-                    title: 'Withholding Tax Certificate Checker',
-                    text: 'Verify Withholding Tax Certificates to ensure they are genuine and issued by KRA.'
-                },
-                'agent-checker': {
-                    title: 'Tax Agent Checker',
-                    text: 'Identify authorized KRA Withholding VAT Agents. Enter the agent PIN to verify their authorization status.'
-                },
-                'status-checker': {
-                    title: 'Case Status Checker',
-                    text: 'Consult the status of your applications made on iTax. Track the progress of your submissions and requests.'
-                },
-                'egms': {
-                    title: 'Excisable Goods Management System',
-                    text: 'Verify the authenticity of excise stamps on excisable goods. Protect yourself from counterfeit products.'
-                }
-            };
-            
-            const info = serviceInfo[service];
-            if (info) {
-                document.getElementById('serviceModalTitle').textContent = info.title;
-                document.getElementById('serviceModalText').textContent = info.text;
-                document.getElementById('serviceModal').classList.add('active');
+        // Service select
+        function handleServiceSelect(value) {
+            if (value) {
+                window.open(value, '_blank');
             }
         }
 
-        function closeServiceModal() {
-            document.getElementById('serviceModal').classList.remove('active');
-        }
-
-        // Search Functionality
-        function toggleSearch() {
-            const overlay = document.getElementById('searchOverlay');
-            if (overlay.style.display === 'flex') {
-                overlay.style.display = 'none';
+        function getStarted() {
+            const select = document.getElementById('action');
+            if (select.value) {
+                window.open(select.value, '_blank');
             } else {
-                overlay.style.display = 'flex';
-                document.getElementById('searchInput').focus();
+                alert('Please select a service first');
             }
         }
 
-        function performSearch() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            if (query) {
-                // Simple search routing
-                if (query.includes('pin') || query.includes('registration')) {
-                    navigateTo('individual');
-                } else if (query.includes('business') || query.includes('company') || query.includes('vat')) {
-                    navigateTo('business');
-                } else if (query.includes('staff') || query.includes('verify') || query.includes('verification')) {
-                    navigateTo('staff-verification');
-                } else if (query.includes('contact') || query.includes('phone') || query.includes('email')) {
-                    navigateTo('contact');
-                } else if (query.includes('online') || query.includes('itax') || query.includes('service')) {
-                    navigateTo('online-services');
-                } else {
-                    alert('Search results for: ' + query + '\n\nTry searching for: PIN, Business, Staff Verification, Contact, or Online Services');
-                }
-                toggleSearch();
-            }
-        }
-
-        // Chatbot Functionality
-        function toggleChat() {
-            const chat = document.getElementById('chatContainer');
-            chat.classList.toggle('active');
-            if (chat.classList.contains('active')) {
-                document.getElementById('chatInput').focus();
-            }
-        }
-
-        function handleChatKeypress(event) {
-            if (event.key === 'Enter') {
-                sendChatMessage();
-            }
-        }
-
-        function sendQuickReply(message) {
-            addMessage(message, 'user');
-            processBotResponse(message);
-        }
-
-        function sendChatMessage() {
-            const input = document.getElementById('chatInput');
-            const message = input.value.trim();
-            
-            if (message) {
-                addMessage(message, 'user');
-                input.value = '';
-                processBotResponse(message);
-            }
-        }
-
-        function addMessage(text, sender) {
-            const messagesContainer = document.getElementById('chatMessages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'message ' + sender;
-            messageDiv.textContent = text;
-            messagesContainer.appendChild(messageDiv);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        function processBotResponse(userMessage) {
-            const lowerMessage = userMessage.toLowerCase();
-            let response = '';
-            let quickReplies = [];
-            
-            // Simple response logic
-            if (lowerMessage.includes('pin') || lowerMessage.includes('registration')) {
-                response = 'To register for a KRA PIN:\n1. Visit iTax portal (itax.kra.go.ke)\n2. Click "New PIN Registration"\n3. Fill in your details\n4. Submit and download your PIN certificate\n\nFor alien PIN registration, select non-citizen option. Need help with a specific step?';
-                quickReplies = ['Download PIN', 'Forgot PIN', 'Back to menu'];
-            } else if (lowerMessage.includes('return') || lowerMessage.includes('file')) {
-                response = 'To file returns on iTax:\n1. Login with your PIN and password\n2. Click "Returns" tab\n3. Select "File Return"\n4. Choose your tax obligation\n5. Fill in the details and submit\n\nNil returns can be filed if you have no income to declare.';
-                quickReplies = ['Nil Return', 'Income Tax', 'VAT Return', 'Back to menu'];
-            } else if (lowerMessage.includes('tcc') || lowerMessage.includes('compliance') || lowerMessage.includes('certificate')) {
-                response = 'To apply for a Tax Compliance Certificate:\n1. Login to iTax\n2. Click "Compliance" tab\n3. Select "Apply for TCC"\n4. Fill the application form\n5. Submit for processing\n\nYou can check TCC status using our TCC Checker tool.';
-                quickReplies = ['Check TCC Status', 'Apply for TCC', 'Back to menu'];
-            } else if (lowerMessage.includes('contact') || lowerMessage.includes('phone') || lowerMessage.includes('call') || lowerMessage.includes('email')) {
-                response = 'You can reach KRA through:\n\n📞 Call Center: 0711 099 999\n📧 Email: callcentre@kra.go.ke\n🕐 Hours: Mon-Fri, 8AM-5PM\n\nOr visit any KRA office nationwide. Would you like specific regional office contacts?';
-                quickReplies = ['Nairobi Office', 'Mombasa Office', 'Other Regions', 'Back to menu'];
-            } else if (lowerMessage.includes('staff') || lowerMessage.includes('verify') || lowerMessage.includes('verification')) {
-                response = 'To verify a KRA staff member:\n1. Go to Staff Verification page\n2. Enter their National ID Number\n3. Enter your phone number\n4. Click Search\n\nThis helps you confirm you are dealing with genuine KRA employees.';
-                quickReplies = ['Go to Verification', 'Report Fraud', 'Back to menu'];
-            } else if (lowerMessage.includes('vat') || lowerMessage.includes('value added')) {
-                response = 'VAT (Value Added Tax) is charged at 16% on taxable goods and services.\n\nKey points:\n- Register if turnover exceeds KSh 5M/year\n- File monthly returns by 20th\n- Use eTIMS for invoicing\n- Current rate: 16%\n\nDo you need help with VAT registration or filing?';
-                quickReplies = ['VAT Registration', 'File VAT Return', 'eTIMS Info', 'Back to menu'];
-            } else if (lowerMessage.includes('pay') || lowerMessage.includes('payment') || lowerMessage.includes('mpesa')) {
-                response = 'Payment methods:\n\n1. M-PESA: Paybill 572572, Account: PRN\n2. Bank: Use generated payment slip\n3. RTGS: For large amounts\n4. Mobile Banking: Via your bank app\n\nAlways generate a Payment Registration Number (PRN) first on iTax.';
-                quickReplies = ['Generate PRN', 'M-PESA Steps', 'Back to menu'];
-            } else if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('help')) {
-                response = 'Hello! I am your KRA Virtual Assistant. I can help you with:\n\n• PIN registration and management\n• Filing tax returns\n• Tax Compliance Certificates\n• Payment methods\n• Staff verification\n• VAT and other taxes\n\nWhat would you like assistance with?';
-                quickReplies = ['PIN Services', 'File Returns', 'Payments', 'Contact KRA'];
-            } else if (lowerMessage.includes('menu') || lowerMessage.includes('back')) {
-                response = 'What can I help you with today?';
-                quickReplies = ['How do I file returns?', 'How do I get a PIN?', 'Check TCC status', 'Contact support'];
-            } else {
-                response = 'I understand you need help with: "' + userMessage + '"\n\nFor specific assistance, you can:\n1. Call our contact center: 0711 099 999\n2. Email: callcentre@kra.go.ke\n3. Visit nearest KRA office\n\nOr try asking about: PIN, Returns, TCC, VAT, or Payments';
-                quickReplies = ['Contact Center', 'Main Menu', 'Live Agent'];
-            }
-            
-            // Simulate typing delay
-            setTimeout(() => {
-                addMessage(response, 'bot');
-                updateQuickReplies(quickReplies);
-            }, 500);
-        }
-
-        function updateQuickReplies(replies) {
-            const container = document.getElementById('quickReplies');
-            container.innerHTML = '';
-            replies.forEach(reply => {
-                const btn = document.createElement('button');
-                btn.className = 'quick-reply';
-                btn.textContent = reply;
-                btn.onclick = () => sendQuickReply(reply);
-                container.appendChild(btn);
-            });
-        }
-
-        // Accessibility Features
-        function changeFontSize(size) {
-            const html = document.documentElement;
-            if (size === 'small') {
-                html.style.fontSize = '14px';
-            } else if (size === 'medium') {
-                html.style.fontSize = '16px';
-            } else if (size === 'large') {
-                html.style.fontSize = '18px';
-            }
-        }
-
-        function changeLanguage(lang) {
-            // In a real app, this would switch content language
-            document.querySelectorAll('.language-selector span').forEach(span => span.classList.remove('active'));
+        // Language toggle
+        function changeLang(lang) {
+            document.querySelectorAll('.lang-toggle span').forEach(span => span.classList.remove('active'));
             event.target.classList.add('active');
             
             if (lang === 'sw') {
-                alert('Kiswahili translation would load here. Currently displaying English content.');
+                alert('Kiswahili translation would load here');
             }
         }
 
-        // Close modals when clicking outside
-        document.getElementById('verificationModal').addEventListener('click', function(e) {
+        // Close modals on outside click
+        document.getElementById('genericModal').addEventListener('click', function(e) {
             if (e.target === this) closeModal();
         });
 
-        document.getElementById('serviceModal').addEventListener('click', function(e) {
-            if (e.target === this) closeServiceModal();
-        });
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add initial bot message with delay
-            setTimeout(() => {
-                if (document.getElementById('chatMessages').children.length === 1) {
-                    addMessage('Type your question or select a quick reply below!', 'bot');
-                }
-            }, 1000);
+        document.getElementById('successModal').addEventListener('click', function(e) {
+            if (e.target === this) closeSuccessModal();
         });
     </script>
 </body>
-
 </html>
